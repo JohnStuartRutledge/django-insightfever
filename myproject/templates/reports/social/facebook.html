@@ -1,0 +1,115 @@
+{% extends "reports/social/fullpg_base.html" %}
+{% load i18n %}
+{% load fever_tags %}
+
+{% block head_title %}{% trans "Facebook Account" %}{% endblock %}
+{% block body %}
+
+<style type="text/css">
+
+#fever_fields_wrapper {
+    display: inline-block;
+    padding-bottom: 30px;
+}
+
+.fever_field {
+    float: left;
+    margin: 20px 5px 0 0;
+}
+
+.fbook_page_field {
+
+}
+
+.managed_biz_field {
+    margin-bottom: 20px;
+}
+
+#fever_form_colwrapper {
+    margin-top: 30px;
+}
+
+.fever_form_title {
+    float: left;
+    width: 250px;
+}
+
+.remove_btn {
+    float: left;
+    margin: 20px 5px 0 0;
+}
+
+
+</style>
+
+{% if session_expired %}
+    <a href="/social/accounts">RENEW YOU FACEBOOK ACCOUNT</a>
+{% endif %}
+
+<div class="page-header"><h1>{% trans "Facebook Overview" %}</h1></div>
+
+<div class="row">
+
+    <div class="span4">
+        <img src="http://placehold.it/180x200" alt="facebook profile image">
+        <table class="table table-condensed table-striped">
+            <tbody>
+                <tr><td>screen name</td><td>{{ fbook.screen_name }}</td></tr>
+                <tr><td>name</td><td>{{ fbook.name }}</td></tr>
+                <tr><td>location</td><td>{{ fbook.location }}</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="span7 offset1">
+        <h2>FORM ATTEMPT</h2>
+        <p><small>Instructions for this form display here</small></p>
+
+        {% if form %}
+            <div id="fever_form_colwrapper">
+                <div class="fever_form_title">
+                <h3>Facebook Pages <span class="label label-info">Info</span></h3>
+
+                </div>
+
+                <div class="fever_form_title">
+                <h3>Your Businesses <span class="label label-info">Info</span></h3>
+                </div>
+            </div>
+
+            <form id="fever_managed_businesses" class="form-horizontal" name="facebook_pages" method="post">
+            {% csrf_token %}
+                <div id="fever_fields_wrapper">
+                    {% for field in form %}
+                        {{ field }}
+                        {% if forloop.counter|divisibleby:"2" %}
+                            <button class="btn btn-small fever_field" type="button">
+                                {% trans "Remove" %}
+                            </button>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="form-actions">
+                <button class="btn btn-primary" type="submit">{% trans "Save changes" %}</button>
+                <button type="reset" class="btn">{% trans "Cancel" %}</button>
+                </div>
+            </form>
+        {% endif %}
+
+        <br><br>
+
+        <h2>List of matching business found in DB</h2>
+        {{ managed_businesses }}
+
+        <br><br>
+        <h2>Non Matching Businesses</h2>
+        {{ no_match }}
+
+        <br><br>
+        <h2>Fever Businesses</h2>
+        {{ fever_businesses }}
+    </div>
+</div>
+
+
+{% endblock %}

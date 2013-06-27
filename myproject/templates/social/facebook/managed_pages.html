@@ -1,0 +1,128 @@
+{% extends "reports/social/fullpg_base.html" %}
+{% load i18n %}
+{% load fever_tags %}
+
+{% block head_title %}{% trans "Facebook Account" %}{% endblock %}
+{% block body %}
+
+<style type="text/css">
+
+#fever_fields_wrapper {
+    display: inline-block;
+    padding-bottom: 30px;
+}
+
+.fever_field {
+    float: left;
+    margin: 20px 5px 0 0;
+}
+
+.fbook_page_field {
+
+}
+
+.managed_biz_field {
+    margin-bottom: 20px;
+}
+
+#fever_form_colwrapper {
+    margin-top: 30px;
+}
+
+.remove_btn {
+    float: left;
+    margin: 20px 5px 0 0;
+}
+
+.fever_col_title {
+    margin-left: 5px;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+#fever_managed_businesses ul {
+    display: inline-block;
+    list-style-type: none;
+}
+
+#fever_managed_businesses li {
+    float: left;
+}
+
+.biz_name {
+    margin-left: 5px;
+}
+
+#fever_managed_businesses li:last-child {
+    margin-left: 15px;
+}
+</style>
+
+{% if session_expired %}
+    <a href="/social/accounts">RENEW YOU FACEBOOK ACCOUNT</a>
+{% endif %}
+
+<div class="page-header"><h1>{% trans "Facebook Overview" %}</h1></div>
+
+<div class="row">
+
+    <div class="span4">
+        <img src="http://placehold.it/180x200" alt="facebook profile image">
+        <table class="table table-condensed table-striped">
+            <tbody>
+                <tr><td>screen name</td><td>{{ fbook.screen_name }}</td></tr>
+                <tr><td>name</td><td>{{ fbook.name }}</td></tr>
+                <tr><td>location</td><td>{{ fbook.location }}</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="span8">
+        <h2>FACEBOOK MANAGED PAGES FORM</h2>
+        <p><small>This form associates Facebook managed pages with Insight Fever
+            Businesses. This page technically belongs on a settings page somewhere.
+            Perhaps you can combine it with the accounts page.</small></p>
+        {{ form_errors }}
+        {{ data }}
+        {% if formset %}
+
+            <br>
+
+            <form id="fever_managed_businesses" class="form-horizontal" action="" name="facebook_pages" method="post">
+                {% csrf_token %}{{ formset.management_form }}
+                {% comment %}
+                    TODO:
+                        use tables instead of lists for styling the output of
+                        this formsets titles and fields.
+                        Also, move this form into a popup and puts its
+                        template HTML into an individual file
+                {% endcomment %}
+                    <ul>
+                        <li class="fever_col_title input-xlarge">Facebook Pages <span class="label label-info">Info</span></li>
+                        <li class="fever_col_title input-large">Your Businesses <span class="label label-info">Info</span></li>
+                        <li class="fever_col_title">Ignore <span class="label label-info">Info</span></li>
+                    </ul>
+                    {% for form in formset %}
+                        <ul>
+                            {% for field in form.visible_fields %}
+                                <li>
+                                {{ field.errors }}
+                                {{ field }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endfor %}
+
+                <br>
+                <div class="form-actions">
+                <button class="btn btn-primary" type="submit">{% trans "Save changes" %}</button>
+                <button type="reset" class="btn">Cancel</button>
+                </div>
+            </form>
+        {% endif %}
+
+    </div>
+</div>
+
+
+{% endblock %}

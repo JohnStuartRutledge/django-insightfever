@@ -1,0 +1,48 @@
+{% load i18n %}
+
+<form id="upcoming_form_{{ forloop.counter0 }}"
+    class="form-horizontal post_queue_form"
+    action="/post/edit/{{ forloop.counter0 }}"
+    name="edit_upcoming_{{ forloop.counter0 }}"
+    method="post">{% csrf_token %}
+
+    <input type="hidden" name="form-{{ forloop.counter0 }}-id" id="id_form-{{ forloop.counter0 }}-id" value="{{ form.instance.id }}" />
+
+    <div class="upcoming_btn_wrapper clearfix">
+        <div class="initial_post_date">{{ form.initial.post_date|date:"F dS Y g:iA" }}</div>
+        <div class="initial_message span4">{{ form.initial.message|slice:"40" }}</div>
+        <button class="btn btn-small upcoming_btn" type="button">Edit Post</button>
+    </div>
+
+    <table class="table upcoming_formset_table well">
+        <tr>
+            <td class="field_title">Message</td>
+            <td class="field_content">{{ form.message.errors }}{{ form.message }}</td>
+        </tr>
+        <tr>
+            <td class="field_title">Social sites</td>
+            <td class="field_content">
+                <div class="post_queue_list_items">{{ form.social_sites.errors }}{{ form.social_sites }}</div>
+            </td>
+        </tr>
+        <tr>
+            <td class="field_title">Post date</td>
+            <td class="field_content">{{ form.post_date.errors }}{{ form.post_date }}</td>
+        </tr>
+        <tr>
+            <td class="field_title">Business</td>
+            <td class="field_content">{{ form.biz.errors }}{{ form.biz }}</td>
+        </tr>
+
+        <tr>
+            <td class="field_title"></td>
+            <td class="field_content">
+            <button class="btn btn-primary update_post_btn" type="submit" name="save" data="{{ forloop.counter0 }}">{% trans "Post" %}</button>
+            <button class="btn btn-info update_post_btn" type="button" name="draft" data="{{ forloop.counter0 }}">{% trans "Save Draft" %}</button>
+            <button class="btn btn-danger update_post_btn" type="button" name="delete" data="{{ forloop.counter0 }}">{% trans "Delete" %}</button>
+            <div id="form_message_{{ forloop.counter0 }}" class="update_form_message"></div>
+            </td>
+        </tr>
+    </table>
+
+</form>

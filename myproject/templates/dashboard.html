@@ -1,0 +1,95 @@
+{% extends "body_base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Dashboard" %}{% endblock %}
+{% block body_id %}fever_dashboard{% endblock %}
+
+{% block fever_js %}
+<script type="text/javascript" src="{{ STATIC_PREFIX }}js/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_PREFIX }}js/jquery.tablesorter.pager.js"></script>
+<script type="text/javascript">
+// make the dashboard businesses section sortable
+
+{% if needs_pagination %}
+    $(document).ready(function() {
+        $("#fever_dashboard_bizlist")
+            .tablesorter()
+            .tablesorterPager({container: $("#pagination_controls")});
+    });
+{% endif %}
+
+</script>
+{% endblock %}
+
+{% block body %}
+
+    {% include "fever_sidebar.html" %}
+
+    <div class="span7">
+        {% include "_messages.html" %}
+
+        <div class="page-header"><h1>Main Dashboard</h1></div>
+
+        <div class="span8 columns">
+        {% if biz_list %}
+                <table id="fever_dashboard_bizlist" class="table table-condensed tablesorter">
+                <thead>
+                    <tr>
+                        <th>Business</th>
+                        <th>Websites</th>
+                        <th>Reports</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for biz in biz_list %}
+                    <tr>
+                    <td class="span3"><a href="/business/{{ biz.id }}/">{{ biz.biz_name|title }}</a></td>
+                    <td class="span2"><a href="{% url biz_websites biz.id %}">{% trans "Websites" %}</a></td>
+                    <td class="span2"><a href="{% url reports_overview biz.id %}">{% trans "Reports" %}</a></td>
+                    <td class="span1"><a href="{% url biz_edit biz.id %}"><i class="icon-edit"></i></a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+
+            {% comment %}
+                TODO:
+                    use bootstraps pagination styling
+            {% endcomment %}
+            {% if needs_pagination %}
+
+                <div id="pagination_controls" class="pager span4">
+                    <form>
+                        <div class="btn-group">
+                            <a class="btn prev" href="#"><i class="icon-step-backward"></i></a>
+                            <input type="text" class="pagedisplay pagination_input">
+                            <a class="btn next" href="#"><i class="icon-step-forward"></i></a>
+
+                            <select class="pagesize">
+                                <option selected="selected" value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="40">40</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            {% endif %}
+
+
+        {% else %}
+            <p>No businesses were found. To add one, click the button below.</p>
+            <div id="dashboard_makebiz_btn"><a href="/business/new">Add Business</a></div>
+        {% endif %}
+        </div>
+
+    <!--//
+        client-manager controls here
+        if user.has_perms('is manager'):
+            render controls for managing employees
+    //-->
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,59 @@
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Insight Fever - {% block title %}{% endblock %}</title>
+    <meta name="description" content="Social and Web analytics with Insight Fever">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <!--//<link href='http://fonts.googleapis.com/css?family=Bowlby+One+SC' rel='stylesheet' type='text/css'>//-->
+    <link rel="stylesheet" href="{{ STATIC_PREFIX }}css/style.css">
+    <link rel="stylesheet" href="{{ STATIC_PREFIX }}bootstrap/css/bootstrap.css">
+    <!--//<script src="{{ STATIC_PREFIX }}js/libs/modernizr-2.0.6.min.js"></script>//-->
+</head>
+
+<body id="{% block body_id %}{% endblock %}">
+    
+    <header>{% block header_base %}{% endblock %}</header>
+    
+    <div role="main" id="fever_body_content">
+    {% block body_base %}{% endblock %}
+    </div>
+
+    {% block content %}{% endblock %}
+
+    <footer>
+        <div class="inner">
+            <div class="container">
+                <div class="legal">&copy; 2012 (<a href="http://www.mindwink.com"> MindWink </a>)</div>
+            </div>
+        </div>
+    </footer>
+    <script src="{{ STATIC_PREFIX }}js/libs/jquery-1.7.1.min.js"></script>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{{ STATIC_PREFIX }}js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+    
+    <!--<script src="static/js/libs/jquery.lettering-0.6.1.min.js"></script>
+    <script src="static/js/libs/jquery.scrollorama.js"></script>
+    <script src="static/js/libs/d3.min.js"></script>-->
+    <script src="{{ STATIC_PREFIX }}bootstrap/js/bootstrap.min.js"></script>
+    {% block fever_js %}{% endblock %}
+    <script type="text/javascript">
+    /*
+        window.setTimeout(function() {
+            $(".alert-success").alert('close'); 
+        }, 2000);
+    */
+    </script>
+    <!--[if lt IE 9 ]>
+    <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+    <![endif]-->
+</body>
+</html>

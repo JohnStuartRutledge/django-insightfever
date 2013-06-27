@@ -1,0 +1,108 @@
+{% load i18n %}
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+{% load bootstrap_tags %}
+{% load ifsetting_tag %}
+<!DOCTYPE html>
+<head>
+<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/style.css">
+<link rel="stylesheet" href="{{ STATIC_PREFIX }}bootstrap/css/bootstrap.css">
+<style type="text/css">
+body { 
+    background-color: #333 !important; 
+    color: #CCC;
+    font-size: .9em;
+    line-height: 1.5em;
+    font-family: "Liberation Mono", "Helvetica", Verdana;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family:Cambria,'Palatino Linotype','Book Antiqua','URW Palladio L',serif;
+    color: yellow;
+}
+#main_title { 
+    width: 100%;
+    text-align: center;
+    color: #FFF;
+    border-bottom: 1px solid #999;
+    height: 1.5em;
+}
+.keyword {
+    font-weight: bold;
+    color: bisque;
+    width: 100px;
+    display: inline-block;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="span12">
+
+<h1 id='main_title'>File 2 Database Insertion Page</h1>
+
+{% include "_messages.html" %}
+
+{% if filename %}
+    <h3>File Name</h3>
+    <p>{{ filename }}</p>
+{% endif %}
+
+{% if sitetype %}
+    <h3>File Website Type</h3>
+    <p>{{ sitetype }}</p>
+{% endif %}
+
+{% if filesize %}
+    <h3>File Size</h3>
+    <p>{{ filesize }} Bytes</p>
+{% endif %}
+
+{% if jsondata %}
+    <h3>Json Data</h3>
+    <p>{{ jsondata }}</p>
+{% endif %}
+
+{% if data %}
+    <h3>Data</h3>
+    {{ data }}
+{% endif %}
+
+{% if available %}
+    <h3>context.keys()</h3>
+    {{ available }}
+{% endif %}
+
+<br>
+<h2>Form</h2>
+
+{% if form %}
+<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <fieldset>{{ form|as_bootstrap }}</fieldset>
+    
+    {{ form.non_field_errors }}
+    {{ form.file.errors }}
+    
+    {% comment %} 
+        {{ form.file.help_text }}
+        {{ form.file.label_tag }}
+        {{ form.file }}
+    {% endcomment %}
+    
+    <div class="form-actions">
+    <button class="btn btn-primary" type="submit" value="Upload">Upload File</button>
+    </div>
+    
+</form>
+{% endif %}
+
+
+</div>
+</div><!-- div.container -->
+<script src="{{ STATIC_PREFIX }}js/libs/jquery-1.7.1.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{ STATIC_PREFIX }}js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+<script src="{{ STATIC_PREFIX }}bootstrap/js/bootstrap.min.js"></script>
+<body>
+</html>

@@ -1,0 +1,120 @@
+{% extends "reports/social/fullpg_base.html" %}
+{% load i18n %}
+{% load fever_tags %}
+
+{% block head_title %}{% trans "LikeRiser" %}{% endblock %}
+{% block fever_js %}
+    <script type="text/javascript" src="{{ STATIC_PREFIX }}js/libs/datepicker/js/bootstrap-datepicker.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_PREFIX }}js/libs/datepicker/css/datepicker.css">
+    <script type="text/javascript">
+        $('.datepicker').datepicker({
+            format: 'yyyy-mm-dd'
+        });
+
+        // javascript for showing/hiding the formset
+        $(function() {
+            $('.upcoming_formset_table').hide();
+            $('.upcoming_btn').click(function(){
+                var t = $(this);
+                t.parent().next('.upcoming_formset_table').toggle('fast', function(){
+                    var klass = ($(this).is(':hidden')) ? 'btn btn-small' : 'btn btn-inverse btn-small';
+                    var txt   = ($(this).is(':hidden')) ? 'Edit Post' : 'Hide Post';
+                    t.attr('class', klass);
+                    t.html(txt);
+                });
+            })
+
+        });
+
+    </script>
+{% endblock %}
+{% block body %}
+
+
+<div class="page-header"><h1>{% trans "LikeRiser Report" %}</h1></div>
+
+<div class="row">
+    <div class="span12">
+    <div class="page-header"><h2>{% trans "create new post" %}</h2></div>
+        <form class="form-horizontal post_queue_form" action="" name="new_post" method="post">
+            {% csrf_token %}
+
+            <table class="table">
+            {% for field in form %}
+                <tr>
+                    <td class="field_title"><strong>{{ field.label }}</strong></td>
+                    <td class="field_content">
+                        {% if field.name == 'status' or field.name == 'social_sites' %}
+                            <div class="post_queue_list_items">{{ field }}</div>
+                        {% else %}
+                            {{ field }}
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </table>
+
+            <div class="form-actions">
+                <button class="btn btn-primary" type="submit">{% trans "Save changes" %}</button>
+                <button class="btn" type="reset">Cancel</button>
+            </div>
+        </form>
+
+        <div class="page-header"><h2>{% trans "upcoming posts" %}</h2></div>
+
+        {% if upcoming_formset %}
+        <div id="upcoming_formset_wrapper">
+            <form class="form-horizontal post_queue_form" action="" name="edit_post" method="post">
+                {% csrf_token %}
+
+            {% for form in upcoming_formset %}
+                <div class="upcoming_btn_wrapper">
+                    <div class="initial_post_date">
+                        {{ form.initial.post_date|date:"F dS Y g:ia" }}
+                    </div>
+                    <div class="initial_message">
+                        {{ form.initial.message|slice:"20" }} 
+                    </div>
+                    {% comment %}
+                        {{ form.initial.social_sites }}
+                        if facebook: load small facebook icon
+                        if twitter:  load small twitter icon
+                    {% endcomment %}
+                    <button id="upcoming_btn_{{ forloop.counter }}" class="btn btn-small upcoming_btn" type="button">Edit Post</button>
+                </div>
+
+                <table id="upcoming_table_{{ forloop.counter }}" class="table upcoming_formset_table well">
+                    {% for field in form %}
+                        {% if field.label == "Id" %}
+                            &nbsp;
+                        {% else %}
+                            <tr>
+                            <td class="field_title"><strong>{{ field.label }}</strong></td>
+                            <td class="field_content">
+                                {% if field.name == 'status' or field.name == 'social_sites' %}
+                                    <div class="post_queue_list_items">{{ field }}</div>
+                                {% else %}
+                                    {{ field }}
+                                {% endif %}
+                            </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </table>
+            {% endfor %}
+
+            <div class="form-actions">
+                <button class="btn btn-primary" type="submit">{% trans "Save changes" %}</button>
+                <button type="reset" class="btn">Cancel</button>
+            </div>
+            </form>
+        </div>
+        {% endif %}
+
+
+        <div class="page-header"><h2>{% trans "past posts" %}</h2></div>
+        {{ past_posts }}
+    </div>
+</div>
+
+{% endblock %}

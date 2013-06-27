@@ -1,0 +1,121 @@
+{% extends "biz/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Reports Overview" %}{% endblock %}
+{% block content_title %}<h2 class="content-title">Reports</h2>{% endblock %}
+{% block fever_js %}
+    <script src="{{ STATIC_PREFIX }}reports/js/d3/d3.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_PREFIX }}reports/js/d3/d3.csv.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_PREFIX }}reports/js/d3/d3.time.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_PREFIX }}reports/js/d3/d3.geom.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_PREFIX }}reports/js/d3/d3.layout.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_PREFIX }}reports/resources/calendar.js"></script>
+    <script type="text/javascript" src="{{ STATIC_PREFIX }}js/jquery.tablesorter.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_PREFIX }}js/xdate.js"></script>
+    <script type="text/javascript">
+    
+        // make the apartment ratings data table sortable
+        // http://tablesorter.com/docs/
+        $(document).ready(function() { 
+            $("#fever_ratings_aptraings_table").tablesorter();
+            $("#fever_ratings_yelp_table").tablesorter(); 
+        });
+        
+        // function for sorting json so that the dates appear 
+        // in proper order on the apartment ratings line-graph
+        function sort_by_id(a, b) {
+            if (a.id < b.id) return -1;
+            if (a.id > b.id) return 1;
+            return 0;
+        }
+        
+        // get relevant data to plug into d3 graphs
+        var aptrating_property   = "{{ biz.biz_name }}",
+                 active_csv      = "{{ STATIC_PREFIX }}reports/resources/activ.csv",
+                 linegraph_csv   = "{{ STATIC_PREFIX }}reports/resources/linegraph.csv",
+                 fbook           = [{{ fbook_demo|safe }}],
+                 aptratings_json;
+        
+        {% if aptratings_json %}
+            // get the apartment ratings data, if it exists
+            aptratings_json = {{ aptratings_json|safe }};
+            aptratings_json.sort(sort_by_id);
+        {% endif %}
+    
+    </script>
+    
+    {% if aptratings_data %}
+        {% ifnotequal aptratings_data "EMPTY" %}
+        <script type="text/javascript" src="{{ STATIC_PREFIX }}js/reports/aptratings.js"></script>
+        {% endifnotequal %}
+    {% endif %}
+    
+    {% if fbook_data %}
+        {% ifnotequal fbook_data "EMPTY" %}
+        <script type="text/javascript" src="{{ STATIC_PREFIX }}js/reports/facebook.js"></script>
+        {% endifnotequal %}
+    {% endif %}
+    
+{% endblock %}
+
+
+{% block body %}
+<div class="tabbable tabs-above">
+    
+    <ul class="nav nav-tabs">
+        <li><a href="#A" data-toggle="tab">Ratings</a></li>
+        <li><a href="#B" data-toggle="tab">Social</a></li>
+        <li><a href="#C" data-toggle="tab">Video</a></li>
+        <li><a href="#D" data-toggle="tab">Survey</a></li>
+        <li><a href="#E" data-toggle="tab">Competition</a></li>
+        <li><a href="#F" data-toggle="tab">My Info</a></li>
+    </ul>
+    
+    <div class="tab-content">
+        
+        <!--//////////////////////////////////////////////////////////////////-->
+        <div class="tab-pane active" id="A">
+        <div class="fever_report_section">
+            {% include "reports/ratings.html" %}
+        </div>
+        </div>
+        
+        <!--//////////////////////////////////////////////////////////////////-->
+        <div class="tab-pane" id="B">
+        <div class="fever_report_section">
+            {% include "reports/social.html" %}
+        </div>
+        </div>
+        
+        <!--//////////////////////////////////////////////////////////////////-->
+        <div class="tab-pane" id="C">
+        <div class="fever_report_section">
+            {% include "reports/video.html" %}
+        </div>
+        </div>
+        
+        <!--//////////////////////////////////////////////////////////////////-->
+        <div class="tab-pane" id="D">
+        <div class="fever_report_section">
+            {% include "reports/survey.html" %}
+        </div>  
+        </div>
+        
+        <!--//////////////////////////////////////////////////////////////////-->
+        <div class="tab-pane" id="E">
+        <div class="fever_report_section">
+            {% include "reports/competition.html" %}
+        </div>
+        </div>
+        
+        <!--//////////////////////////////////////////////////////////////////-->
+        <div class="tab-pane" id="F">
+        <div class="fever_report_section">
+            {% include "reports/myinfo.html" %}
+        </div> 
+        </div>
+        
+    </div><!--end tab-content -->
+
+</div>
+{% endblock %}

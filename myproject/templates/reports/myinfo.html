@@ -1,0 +1,74 @@
+{% load i18n %}
+<div id="biz_details" class="span8">
+    <table id="fever_biz_details_table" class="table table-striped">
+        <thead>
+        <tr>
+        <th colspan="2">
+            <div id="biz_form_name_wrapper">
+            <h2>{{ biz.biz_name|title }}</h2>
+            {% if biz.id %}
+            <a href="/business/{{ biz.id }}/edit">edit</a>
+            {% endif %}
+            </div>
+        </th>
+        </tr>
+        </thead>
+        
+        <tbody>
+        {% if biz.biz_name %}
+        <tr>
+            <td>{% trans "Name" %}</td>
+            <td>{{ biz.biz_name|title }}</td>
+        </tr>
+        {% endif %}
+        {% if biz.biz_info %}
+        <tr>
+            <td>{% trans "Info" %}</td>
+            <td>{{ biz.biz_info }}</td>
+        </tr>
+        {% endif %}
+        {% if biz.biz_email %}
+        <tr>
+            <td>{% trans "Email" %}</td>
+            <td>{{ biz.biz_email }}</td>
+        </tr>
+        {% endif %}
+        {% if biz.biz_phone %}
+        <tr>
+            <td>{% trans "Phone" %}</td>
+            <td>{{ biz.biz_phone }}</td>
+        </tr>
+        {% endif %}
+        {% if biz.address_1 %}
+        <tr>
+            <td>{% trans "Address" %}</td>
+            <td>{{ biz.address_1 }}</td>
+        </tr>
+        {% endif %}
+        {% if biz.address_2 %}
+        <tr>
+            <td>{% trans "Address Continued" %}</td>
+            <td>{{ biz.address_2 }}</td>
+        </tr>
+        {% endif %}
+        {% if biz.city %}
+        <tr>
+            <td>{% trans "City" %}</td>
+            <td>{{ biz.city|title }}</td>
+        </tr>
+        {% endif %}
+        {% if biz.zipcode %}
+        <tr>
+            <td>{% trans "Zip Code" %}</td>
+            <td>{{ biz.zipcode }}</td>
+        </tr>
+        {% endif %}
+        {% if biz.homepg %}
+        <tr>
+            <td>{% trans "Home Website" %}</td>
+            <td>{{ biz.homepg }}</td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+</div>

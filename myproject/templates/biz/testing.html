@@ -1,0 +1,79 @@
+
+{% load i18n %}
+<!DOCTYPE html>
+<head>
+<style type="text/css">
+body { 
+    background-color: #333; 
+    color: #CCC;
+    font-size: .9em;
+    line-height: 1.5em;
+    font-family: "Liberation Mono", "Helvetica", Verdana;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family:Cambria,'Palatino Linotype','Book Antiqua','URW Palladio L',serif;
+    color: yellow;
+}
+#main_title { 
+    width: 100%;
+    text-align: center;
+    color: #FFF;
+    border-bottom: 1px solid #999;
+    height: 1.5em;
+}
+.keyword {
+    font-weight: bold;
+    color: bisque;
+    width: 100px;
+    display: inline-block;
+}
+</style>
+</head>
+<body>
+
+<h1 id='main_title'>STUS TEST PAGE</h1>
+
+
+{% if user.is_staff %}
+    <h2>User Authority</h2>
+    <p>user.is_staff</p>
+    <br>
+{% endif %}
+
+
+{% if everything %}
+    <h2>All template variables</h2>
+    <ul>
+    {% for k, v in everything %}
+        {% if k == "form" %}
+            <h2>Form</h2>
+            <li><fieldset>{{ v.as_p }}</fieldset></li>
+        {% else %}
+            <li><span class='keyword'>{{ k }}:</span> {{ v }}</li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+    <br>
+{% endif %}
+
+{% if form %}
+    <h2>FORM(S)</h2>
+    <form action="" class="biz_website_form" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <fieldset>{{ form.as_p }}</fieldset>
+        <input type="submit" value="{% trans "Save changes" %}" />
+    </form>
+{% endif %}
+
+{% if NO_SITES %}
+    <h3>NO WEBSITES WERE FOUND</h3>
+{% endif %}
+
+{% if biz_list %}
+    <h2>List of users Businesses</h2>
+    {{ biz_list }}
+    <br>
+{% endif %}
+
+<body>
+</html>

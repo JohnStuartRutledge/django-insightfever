@@ -1,0 +1,22 @@
+{% extends "full_page.html" %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Settings Overview" %}{% endblock %}
+{% block body %}
+
+<div class="page-header"><h1>{% trans "Settings Overview" %}</h1></div>
+
+<div class="row">
+    <div class="span8">
+        <h2>Insight Fever Settings</h2>
+        <p>This is a jump off page for the various settings you can set</p>
+        {% comment %}
+            TODO:
+                pull in the various settings material from your subfolders
+        {% endcomment %}
+        {{ test }}
+    </div>
+</div>
+
+
+{% endblock %}

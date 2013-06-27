@@ -1,0 +1,156 @@
+{% extends "reports/social/fullpg_base.html" %}
+{% load i18n %}
+{% load fever_tags %}
+{% comment %} {% extends "full_page.html" %} {% endcomment %}
+
+{% block head_title %}TEST PAGE{% endblock %}
+{% block fever_js %}
+
+    <script type="text/javascript" src="{{ STATIC_PREFIX }}js/libs/datepicker/js/bootstrap-datepicker.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_PREFIX }}js/libs/datepicker/css/datepicker.css">
+    <script type="text/javascript">
+
+        // set the format you want your pop-up calendars date to be in
+        $('.datepicker').datepicker({ format: 'yyyy-mm-dd' });
+
+        // function for showing/hiding the formset for upcoming-posts/drafts
+        $(function() {
+            $('.upcoming_formset_table').hide();
+            $('.upcoming_btn').click(function(){
+                var t = $(this);
+                t.parent().next('.upcoming_formset_table').toggle('fast', function(){
+                    var klass = ($(this).is(':hidden')) ? 'btn btn-small' : 'btn btn-inverse btn-small';
+                    var txt   = ($(this).is(':hidden')) ? 'Edit Post' : 'Hide Post';
+                    t.attr('class', klass);
+                    t.html(txt);
+                });
+            })
+        });
+
+
+        // when a user hits the save button when editing an existing
+        // post in the upcoming posts area, this function will grab
+        // the information about this forms id from the html id tag
+        // and then it will pass that info to the update_post function
+        $('.update_post_btn').click(function(elem) {
+            elem.preventDefault();
+            update_post($(this)); // create the AJAX request
+        });
+
+        // setup the AJAX functioniality for updating a post queue form
+        function update_post(self) {
+
+            var mydata   = self.closest("form").serialize(),
+                btn_type = self.attr('name'),
+                form_id  = self.attr('data');
+
+            // add the button that was pushed to the data
+            mydata = mydata + '&btn_type=' + btn_type
+
+            $.ajax({
+                type: 'POST',
+                url: '/social/post/edit/'+form_id+'/',
+                data: mydata,
+                crossDomain: false,
+                xhrFields: { "X-CSRFToken": "{{ csrf_token }}" },
+                success: function(ctx) {
+                    console.log(ctx);
+                    console.log('ajax update successfully executed');
+                    $('#form_message_'+form_id)
+                        .html('<div class="control-group success">'+
+                        '<span class="help-inline">'+
+                        '<strong>Your post was updated!</strong>'+
+                        '</span></div>').show().fadeOut(9000);
+                },
+                dataType: 'json',
+                fail: function(err) {
+                    console.log(err);
+                }
+            });
+
+
+        };
+
+    </script>
+
+{% endblock %}
+
+{% block body %}
+<div class="row"><div class="span12">
+
+<h3>Facebook Connect Button</h3>
+
+{% if facebook_disconnect_id %}
+    <a href="{% url socialauth_disconnect_individual 'facebook' facebook_disconnect_id %}" class="btn btn-danger btn-small">Disconnect</a>
+    {% comment %}
+    <a href="/disconnect/facebook/3/">Disconnect</a>
+
+    this activates the social_auth.views.disconnect view
+    {% endcomment %}
+{% else %}
+    <a rel="nofollow" href="{% url socialauth_begin 'facebook' %}" class="btn btn-primary btn-small">Add Account</a>
+    {% comment %}
+    <a href="/login/facebook">Add Account</a>
+
+    this activates the social_auth.views.auth view
+
+    this calls the function auth_process(request, backend) which is found in this file
+    the function is wrapped in a decorator that specifies the backend to use
+    and builds a redirect_url for said backend
+
+    {% endcomment %}
+{% endif %}
+
+
+<!--========================================================================-->
+
+{% comment %}
+<div class="tab-pane" id="upcoming_tab">
+    <div class="row">
+        <div class="span8 offset1">
+            <div class="page-header"><h2>{% trans "Upcoming Posts" %}</h2></div>
+
+                {% if upcoming_posts %}
+                    {% for form in upcoming_formset %}
+                        {% include "social/post_form.html" %}
+                    {% endfor %}
+                {% else %}
+                    <p>No upcoming posts found</p>
+                {% endif %}
+
+        </div>
+    </div>
+</div>
+{% endcomment %}
+
+<div class="tab-pane" id="upcoming_tab">
+    <div class="row">
+        <div class="span8 offset1">
+            <div class="page-header"><h2>{% trans "Upcoming Posts" %}</h2></div>
+
+                {% if upcoming_posts %}
+                    {% for form in upcoming_posts %}
+                        {% include "social/post_form.html" %}
+                    {% endfor %}
+                {% else %}
+                    <p>No upcoming posts found</p>
+                {% endif %}
+
+        </div>
+    </div>
+</div>
+
+
+{% comment %}
+<br><br><p>{{ dir }}</p>
+<ul>
+    <li>request.path = {{ request.path }}</li>
+    <li>request.path_info = {{ request.path_info }}</li>
+    <li>request.session = {{ request.session }}</li>
+    <li>request.META = {{ request.META }}</li>
+</ul>
+{% endcomment %}
+
+</div></div>
+
+{% endblock %}

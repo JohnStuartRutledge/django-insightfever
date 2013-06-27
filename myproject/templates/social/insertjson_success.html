@@ -1,0 +1,48 @@
+
+{% load i18n %}
+<!DOCTYPE html>
+<head>
+<style type="text/css">
+body { 
+    background-color: #333; 
+    color: #CCC;
+    font-size: .9em;
+    line-height: 1.5em;
+    font-family: "Liberation Mono", "Helvetica", Verdana;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family:Cambria,'Palatino Linotype','Book Antiqua','URW Palladio L',serif;
+    color: yellow;
+}
+#main_title { 
+    width: 100%;
+    text-align: center;
+    color: #FFF;
+    border-bottom: 1px solid #999;
+    height: 1.5em;
+}
+.keyword {
+    font-weight: bold;
+    color: bisque;
+    width: 100px;
+    display: inline-block;
+}
+</style>
+</head>
+<body>
+
+<h1 id='main_title'>Test Insert Json Page</h1>
+
+<!-- Upload form. Note enctype attribute! -->
+<form action="/uploadfile/" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {{ form.file.help_text }}
+    {{ form.file.label_tag }}
+    {{ form.file.errors }}
+    {{ form.file }}
+    <input type="submit" value="Upload" />
+</form>
+
+<body>
+</html>

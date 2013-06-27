@@ -1,0 +1,21 @@
+{% extends "userena/base_userena.html" %}
+{% load i18n %}
+{% load bootstrap_tags %}
+{% load ifsetting_tag %}
+
+{% block content_title %}<h2>{% blocktrans with user.username as username %}Account &raquo; {{ username }}{% endblocktrans %}</h2>{% endblock %}
+
+{% block body %}
+
+    {% include "fever_sidebar.html" %}
+    <div class="span7 offset1">
+        <form action="" method="post">{% csrf_token %}
+            <legend>{% trans "Change email address" %}</legend>
+            <fieldset>{{ form|as_bootstrap }}</fieldset>
+            <div class="form-actions">
+                <button class="btn" type="submit">{% trans "Change Email" %}</button>
+            </div>
+        </form>
+        </div>
+
+{% endblock %}

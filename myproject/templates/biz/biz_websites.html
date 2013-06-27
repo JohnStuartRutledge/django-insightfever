@@ -1,0 +1,47 @@
+{% extends "biz/base.html" %}
+{% load i18n %}
+{% load bootstrap_tags %}
+{% load ifsetting_tag %}
+
+{% block title %}{% trans "Websites" %}{% endblock %}
+{% block content_title %}<h2 class="content-title">Your Websites</h2>{% endblock %}
+
+{% block body %}
+   
+   {% if NO_SITES %}
+       <div class="fever_announcement"><p>No websites were found, Start adding some below</p></div>
+   {% endif %}
+   
+    {% if formset %}
+    
+        <form class="form" action="" method="post">
+        {% csrf_token %}
+        <legend>List of Monitored Websites</legend>
+
+            {% for form in formset %}
+                <table class="table well fever_website">
+                    
+                    {% for field in form %}
+                        {% if field.label == "Business" or field.label == "Id" %}
+                            &nbsp;
+                        {% else %}
+                            <tr>
+                                <td class="field_title"><strong>{{ field.label }}</strong></td>
+                                <td class="field_content">{{ field }}</td>
+                            </tr>
+                        
+                        {% endif %}
+                    
+                    {% endfor %}
+            
+                </table>
+                
+            {% endfor %}
+        <div class="form-actions">
+            <button class="btn btn-primary" type="submit">{% trans "Save changes" %}</button>
+            <button type="reset" class="btn">Cancel</button>
+        </div>
+        </form>
+    
+    {% endif %}
+{% endblock %}

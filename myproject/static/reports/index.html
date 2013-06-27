@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	
+	<title>ANALYTICS / REPORTING</title>
+	
+	<!--=====================CSS======================-->
+	
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/report.css">
+	<link rel="stylesheet" href="css/colorbrewer.css">
+	<!--==================JAVASCRIPT==================-->
+	
+	<script src="js/libs/modernizr-1.7.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+	<script type="text/javascript">
+	// javascript that controls the slider functionality of each section
+	$(document).ready(function() {
+	    $(".toggle_content").hide();
+	    $(".toggle_title").click(function() {
+	        $(this).parent().toggleClass('expanded');
+	        $(this).next(".toggle_content").slideToggle(100);
+	    });
+	});
+	</script>
+	
+	<!--=====================HTML=====================-->
+</head>
+<body>
+	<div id="container">
+	<header>
+	    <div id="nav_wrapper">
+	        <nav id="main_menu">
+                <ul>
+                <li><a href="#anchor_campaigns">Campaigns</a></li>
+                <li><a href="#anchor_blog">Blog</a></li>
+                <li><a href="#anchor_social">Social</a></li>
+                <li><a href="#anchor_ratings">Ratings</a></li>
+                <li><a href="#anchor_posts">Posts</a></li>
+                <li><a href="#anchor_videos">Video</a></li>
+                <li><a href="#anchor_conclusion">Conclusion</a></li>
+                </ul>
+            </nav>
+        </div>
+    	<div id="header_wrapper">
+            <div id="main_main_title" class="main_title">
+            <h1>ANALYTICS / REPORTING</h1>
+            <div id="company">@@CLIENT@@</div>
+            </div>
+        </div>
+    </header>
+    
+    <div id="main" role="main">
+        
+        <div id="center" class="report">
+        
+        <!--===========================================================================-->
+        
+        <div id="main_summary" class="section_wrapper">
+            <div class="summary_long" style="color:#CCC;">
+            <p>Report for: @@MONTH@@ @@YEAR@@</p>
+            <p>The report is broken down into the various sections below.
+                Please feel free to contact us at anytime with questions.</p>
+            <p>Links to your sites:</p>
+            @@SOCIALMENU@@
+            </div>
+            
+        </div><!--end_section_wrapper-->
+        
+        <!--===========================================================================-->
+       
+        <!--<div class="section_wrapper">
+            <h1 class="toggle_title">TEST AREA</h1>
+            <div class="toggle_contentZZZ">
+                <div class="report_summary">Testing zone for new D3 content</div>
+                <div class="report_content">
+                
+                <div id="d3_test"></div>
+                <div id="d3_test_2"></div>
+                </div>
+            </div>
+        </div>-->
+         <!--===========================================================================-->
+        
+        <div class="section_wrapper">
+            <h1 class="toggle_title">BLOG REPORT</h1>
+            <div class="toggle_content">
+                <div class="report_summary">
+                Summary and link to each blog post created this month.
+                </div>
+                <div class="report_content">
+                <div class="report_title">Post</div>
+                <ul class="report_list">
+                <li><p>summary</p></li>
+                <li><p><a href="#posts_blog">Highlighted Comments</a></p></li>
+                </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!--===========================================================================-->
+
+        <div class="section_wrapper">
+            <h1 class="toggle_title">SOCIAL SITES REPORT</h1>
+            <div class="toggle_content">
+            
+                <div class="report_summary">
+                Explores data on various useful topics 
+                collected from the social media sites you currently subscribe to.
+                </div>
+                <div class="report_content">
+            
+                <div class="report_title"><a href="@@URL_FACEBOOK@@">Facebook</a></div>
+                    
+                    <div class="report_paragraph"><p>
+                        The demographic information below is broken down by the age/sex of your facebook users.<br>
+                        Men are presented on the left side, women on the right.
+                    </p></div>
+                    
+                    <!-- DEMOGRAPHIC PYRAMID -->
+                    <div id="barchart"></div>
+                    
+                    <div class="brclear"></div>
+                    <div class="report_paragraph"><p>
+                        Here is a pie chart featuring the overall male to female ratio.<br>
+                        You can also toggle the button below to see an age distribution where both genders are combined.
+                    </p></div>
+                    
+                    <!-- DEMOGRAPHIC DONUT CHART -->
+                    <div id="demographic_pie">
+                        
+                        <div id="demo_pie_radios">
+                            <input id="sex" type="radio" name="demodonut" value="sex" checked> 
+                            <label for="sex">Sex</label> 
+                            <input id="age" type="radio" name="demodonut" value="age"> 
+                            <label for="age">Age</label>
+                        </div>
+                    </div>
+                    <div id="demo_pie_legend"></div>
+                    
+                    <div class="brclear"></div>
+                    <div class="chart_separator"></div>
+                    <div class="report_paragraph"><p>
+                        NOTE - THIS FEATURE IS COMING SOON ( TEMPORARY EXAMPLE GRAPH BELOW )<br>
+                        Below you will find a series of colored squares representing every day of every month this year.
+                        Warmer colors mean your Facebook page was more busier (in terms of traffic) than the average.<br>
+                        Colder colors mean your Facebook page was less busy that day.
+                        </p></div>
+                    <!-- ACTIVITY CALENDAR -->
+                    <div class="svg_wrapper">
+                    <div id="report_calendar"></div>
+                    </div>
+                
+                <!--
+                <div class="report_title">Twitter</div>
+                <ul class="report_list">
+                    <li>Stats (this months changes)</li>
+                    <li><a href="#posts_twitter">Highlighted Re-tweets</a></li>
+                </ul>
+                -->
+
+            </div><!--end report_content -->
+            
+            
+        </div>
+        </div><!--end_section_wrapper-->
+
+        <!--===========================================================================-->
+        
+        <div class="section_wrapper">
+            <h1 class="toggle_title">RATING SITES REPORT</h1>
+            <div class="toggle_content">
+            
+            <div class="report_summary">
+                Below is your rating/score as it currently
+                appears on the given rating-sites. The up-down arrows are used to indicate
+                an increase or decrease in your rating compared to the previous month. You
+                will see a circle for no change. 
+                
+                Please note that the more ratings you acquire the more your score will stabilize.
+            </div>
+            <div class="report_content">
+                
+                
+                <div class="two_col">
+                    <a href="@@URL_APTRATINGS@@">Apartmentratings.com</a>
+                    @@APTRATINGS_WIDGET@@
+                </div>
+                
+                <!--/////////////////////////////////////////////////-->
+                
+                <div class="two_col">
+                    <a href="@@URL_YELP@@">Yelp.com</a>
+                    <div class="two_col_txt"><p>Yelp rating saw no change this month.</p></div>
+                    
+                    <div class="yelp_wrap">
+                        <div id="bizInfoHeader">
+                            <h1 class="org">@@CLIENT@@</h1>
+                            <div id="bizRating">
+                            <div class="rating">
+                            <span class="star-img stars_2_half">
+                            <img class="rating average" width="84" height="325" alt="4.5 star rating" src="img/yelp/stars_map.png">
+                            </span>
+                            </div>
+                            <span class="review-count"><span class="count">7</span> reviews</span>
+                            </div>
+                        </div>
+                    </div><!--end yelp_wrap-->
+                
+                </div>
+                
+                <div class="brclear"></div>
+                <!--/////////////////////////////////////////////////-->
+                
+                <h2 id="ratings_graph_title">Apartment Ratings Overtime</h2>
+                <div id="ratings_graph"></div>
+                
+                
+            </div><!--end report_content -->
+            
+        </div>
+        </div><!--end_section_wrapper-->
+
+        <!--===========================================================================-->
+        
+
+        <div class="section_wrapper">
+            <h1 class="toggle_title">HIGHLIGHTED POSTS</h1>
+            <div class="toggle_content">
+            
+            <div class="report_summary">
+            Here you will find posts of interest written by future 
+            and existing residents alike. We have provided a summary of each post, as well
+            as bolded information we feel is especially deserving of your attention.
+            </div>
+            <div class="report_content">
+                
+                <div id="posts_facebook" class="report_title">
+                    <a href="@@URL_FACEBOOK@@">Facebook</a>
+                </div>
+                    <ul class="report_list">
+                        <li>
+                            <div class="highlight_post_wrapper">
+                            <div class="highlight_synopsis">Post summary</div>
+                            <div class="highlight_info">
+                            <div class="highlight_name"><a href="mailto:tenantemail@gmail.com">Tenant Name</a></div>
+                            <div class="highlight_date">x/x/x 00:00PM</div>
+                            </div>
+                            
+                            <div class="brclear"></div>
+                            <div class="highlight_txt">
+                            <p>tenant message here <span class="featured_line">Featured Line.</span></p>
+                            </div>
+                            </div><!--end_highlight_post_wrapper-->
+                        </li>
+                        <li>
+                            <div class="highlight_post_wrapper">
+                            <div class="highlight_synopsis">Post summary</div>
+                            <div class="highlight_info">
+                            <div class="highlight_name"><a href="mailto:tenantemail@gmail.com">Tenant Name</a></div>
+                            <div class="highlight_date">x/x/x 00:00PM</div>
+                            </div>
+                            
+                            <div class="brclear"></div>
+                            <div class="highlight_txt">
+                            <p>tenant message here</p>
+                            </div>
+                            </div><!--end_highlight_post_wrapper-->
+                        </li>
+                    </ul>
+            
+            
+                <div id="posts_aptratings" class="report_title">
+                    <a href="@@URL_APTRATINGS@@">Apartment Ratings</a>
+                </div>
+                    @@APTRATINGS_POSTS@@
+                
+                
+                    <div id="posts_yelp" class="report_title">
+                        <a href="@@URL_YELP@@">Yelp</a>
+                    </div>
+                        <ul class="report_list">
+                            <li>
+                                <div class="highlight_post_wrapper">
+                                <div class="highlight_synopsis">Post summary</div>
+                                <div class="highlight_info">
+                                <div class="highlight_name"><a href="mailto:tenantemail@gmail.com">Tenant Name</a></div>
+                                <div class="highlight_date">x/x/x 00:00PM</div>
+                                </div>
+
+                                <div class="brclear"></div>
+                                <div class="highlight_txt">
+                                <p>tenant message here <span class="featured_line">Featured Line.</span></p>
+                                </div>
+                                </div><!--end_highlight_post_wrapper-->
+                            </li>
+                        </ul>
+                    
+                    
+                    <div id="posts_twitter" class="report_title">
+                        <a href="@@URL_TWITTER@@">Twitter</a>
+                    </div>
+                        <ul class="report_list">
+                            <li>No active Twitter account</li>
+                        </ul>
+                    
+                    
+                    <div id="posts_youtube" class="report_title">Youtube</div>
+                        <ul class="report_list">
+                            <li>No featured comments this month</li>
+                        </ul>
+            
+            
+            </div><!--end report_content -->
+            
+        </div>
+        </div><!--end_section_wrapper-->
+        
+        <!--===========================================================================-->
+        
+        <div class="section_wrapper">
+            <h1 class="toggle_title">VIDEO</h1>
+            <div class="toggle_content">
+            
+            <div class="report_summary">
+                Here are the short amateur style video clips posted
+                on Youtube this month. The purpose of these videos are to provide brief glimpses
+                (max 20sec or so on average) of special features pertaining to your property and its
+                surroundings. 
+                <br><br>
+                By highlighting qualities that might otherwise go unnoticed, we
+                can ensure a better customer satisfaction for existing residents while at the same time
+                providing potential residents with more incentive for signing that dotted line.</div>
+            <div class="report_content">
+                
+                <div id="video_container">
+                <h3>VIDEO ONE</h3>
+                <div class="video_summary">summary of video</div>
+                <!--<iframe width="425" height="349" src="http://www.youtube.com/embed/aFRNh59w2d8" frameborder="0" allowfullscreen></iframe>-->
+                </div>
+                
+                <br><br>
+                <p>Visit your <a href="@@URL_YOUTUBE@@">Youtube page</a> for more.</p>
+            </div><!--end report_content -->
+        
+        
+        </div>
+        </div><!--end_section_wrapper-->
+        
+        <!--===========================================================================-->
+        
+        <div class="section_wrapper">
+            <h1 class="toggle_title">CONCLUSION / FUTURE DIRECTION</h1>
+            <div class="toggle_content">
+            
+            <div class="report_summary">
+                Here we describe our general conclusions given all that
+                was experienced this month. Prevalent themes are addressed, as well as
+                various questions, concerns, and many other miscellaneous items of interest.
+                <br>We end things by making suggestions and setting out a preliminary course for next month.
+                <br><br><br>
+            </div>
+            <div class="report_content">
+                
+                <h2>Resident Concerns</h2>
+                    <ul class="report_list">
+                        <li><p>summarize this months resident concerns</p></li>
+                        <li>concern one</li>
+                        <li>concern two</li>
+                    </ul>
+                
+                <br><br>
+                
+                <h2>Resident Praise</h2>
+                <ul class="report_list">
+                    <li><p>list out quotes of this months resident praise</p></li>
+                    <li>praise one</li>
+                    <li>praise two</li>
+                </ul>
+                
+                <br><br>
+                
+                <h2>Main take away 1</h2>
+                <ul class="report_list">
+                    <li><p>Info about main take away one.</p></li>
+                </ul>
+                
+    	        <br><br>
+
+                <h2>Main take away 2</h2>
+                    <ul class="report_list">
+                        <li>
+                        <p>Info about main take away two.</p>
+                        <br>
+                        <ul class="report_list">
+                            <li><h3>Scenario One:</h3></li>
+                            <li class="senario_synopsis">more info here</li>
+                            <li>SOLUTION:</li>
+                        </ul>
+                        </li>
+                    </ul>
+                
+
+                    </p>
+                <div class="report_title">Goals for Next Month</div>
+                <ul class="report_list">
+                <li>goal one</li>
+                <li>goal two</li>
+                <li>goal three</li>
+                </ul>
+                
+            </div><!--end report_content -->
+            
+        
+        </div>
+        </div><!--end_section_wrapper-->
+       
+       <!--===========================================================================-->
+
+            
+        </div><!--end_center-->
+	</div><!--end_main-->
+	<footer>
+	   <div id="footer_wrapper">Document Footer</div>
+	</footer>
+	</div><!--end_container-->
+
+<!--======================START JAVASCRIPT======================-->
+<!--[if lt IE 7 ]>
+<script src="js/libs/dd_belatedpng.js"></script>
+<script> DD_belatedPNG.fix('img, .png_bg');</script>
+<![endif]-->
+
+<!--[if lt IE 8 ]>
+<script type="text/javascript" src="js/d3/lib/sizzle/sizzle.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="js/d3/d3.min.js"></script>
+<script type="text/javascript" src="js/d3/d3.csv.min.js"></script>
+<script type="text/javascript" src="js/d3/d3.geom.min.js"></script>
+<script type="text/javascript" src="js/d3/d3.layout.min.js"></script>
+<script type="text/javascript" src="js/d3/d3.time.min.js"></script>
+<!--////////-->
+<script type="text/javascript" src="resources/calendar.js"></script>
+
+<script type="text/javascript">
+    
+    var fbook = [{
+        "F.25.34"   : "44",
+        "M.25-34"   : "41",
+        "M.18-24"   : "14",
+        "F.18-24"   : "14",
+        "M.35-44"   : "11",
+        "F.35-44"   : "8",
+        "F.45-54"   : "7",
+        "M.45-54"   : "2",
+        "U.35-44"   : "1",
+        "U.18-24"   : "1",
+        "F.55+"     : "1",
+        "M.55+"     : "1",
+        "U.UNKNOWN" : ""
+    }];
+    
+    @@JAVASCRIPT@@
+    
+</script>
+<script type="text/javascript" src="resources/report.js"></script>
+<!--======================END JAVASCRIPT======================-->
+
+</body>
+</html>

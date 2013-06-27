@@ -1,0 +1,21 @@
+{% extends "full_page.html" %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Facebook Settings" %}{% endblock %}
+{% block body %}
+
+{% if session_expired %}
+    <a href="/social/accounts">RENEW YOU FACEBOOK ACCOUNT</a>
+{% endif %}
+
+<div class="page-header"><h1>{% trans "Facebook Overview" %}</h1></div>
+
+<div class="row">
+    <div class="span8">
+        <h2>FACEBOOK SETTINGS</h2>
+        <p><small>This page is for managing your Facebook settings.</small></p>
+    </div>
+</div>
+
+
+{% endblock %}

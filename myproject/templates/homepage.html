@@ -1,0 +1,50 @@
+{% extends "body_base.html" %}
+{% load i18n %}
+{% load ifsetting_tag %}
+
+{% block body_id %}fever_home{% endblock %}
+{% block body %}
+    <div class="hero-unit">
+    {% block banner %}
+        <h1>Welcome to Insight Fever!</h1>
+        <p>
+            <b>Insight Fever</b> consolidates all your web-analytics into a single online software application. Monitor:
+        </p>
+        <ul id="fever_home_featurelist">
+            <li>Social media sites like Twitter and Facebook</li>
+            <li>3rd party rating sites like Yelp and Amazon</li>
+            <li>Competitors strengths, weaknesses, and online-activity</li>
+            <li>Web traffic data, SEO &amp; keyword performance</li>
+            <li>Customer sentiment, and much much more...</li>
+        </ul>
+        
+        <p>Customer <a href="{{ LOGIN_URL }}" class="btn btn-primary btn-large">Log In</a></p>
+        
+    {% endblock %}
+    </div>
+    
+    <div class="row">
+        <div class="span4">
+        {% block column-1 %}
+            <h2>Simplicity</h2>
+            <p>Data should be easy to understand.</p>
+            <p><a class="btn" href="#">Learn More &raquo;</a></p>
+        {% endblock %}
+        </div>
+        <div class="span4">
+        {% block column-2 %}
+            <h2>Clarity</h2>
+            <p>Context should be clear at all times.</p>
+            <p><a class="btn" href="#">Learn More &raquo;</a></p>
+        {% endblock %}
+        </div>
+        <div class="span4">
+        {% block column-3 %}
+            <h2>Beauty</h2>
+            <p>Presentation matters.</p>
+            <p><a class="btn" href="#">Learn More &raquo;</a></p>
+        {% endblock %}
+        </div>
+    </div>
+
+{% endblock %}

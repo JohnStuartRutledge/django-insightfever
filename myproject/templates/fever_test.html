@@ -1,0 +1,284 @@
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+{% load i18n %}
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Test Page</title>
+    <link rel="stylesheet" href="{{ STATIC_PREFIX }}bootstrap/css/bootstrap.css">
+<style type="text/css">
+body { 
+    background-color: #333; 
+    color: #CCC;
+    font-size: .9em;
+    font-family: "Liberation Mono", "Helvetica", Verdana !important;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family:Cambria,'Palatino Linotype','Book Antiqua','URW Palladio L',serif;
+    color: yellow;
+}
+#main_title { 
+    width: 100%;
+    text-align: center;
+    color: #FFF;
+    border-bottom: 1px solid #999;
+    height: 1.5em;
+}
+.keyword {
+    font-weight: bold;
+    color: bisque;
+    width: 100px;
+    display: inline-block;
+}
+.table {
+    border: 5px solid #111;
+}
+.table th {
+    color: skyblue;
+    background-color: #23353B;
+}
+.table td:first-child {
+    color: gold !important;
+}
+.table th, .table td {
+    border-top: 1px solid #000;
+}
+</style>
+</head>
+<body>
+<h1 id='main_title'>STUS TEST PAGE</h1>
+<div class="container">
+
+
+<!--=======================================================================-->
+<h2>User Authority</h2>
+<table class="table table-condensed">
+    <tr>
+    <th>User-Type</th>
+    <th>has-it?</th>
+    </tr>
+    <tr>
+    <td>is_superuser</td>
+    <td>{% if user.is_superuser %}X{% endif %}</td>
+    </tr>
+    <tr>
+    <td>is_staff</td>
+    <td>{% if user.is_staff %}X{% endif %}</td>
+    </tr>
+    <tr>
+    <td>is_anon</td>
+    <td>{% if user.is_anonymous %}X{% endif %}</td>
+    </tr>
+</table>
+
+<!--=======================================================================-->
+<h2>User Permissions</h2>
+<table class="table table-condensed">
+    <tr><th>Permission</th><th>has-it?</th></tr>
+    <tr>
+      <td>can view business</td>
+      <td>{% if view_business %}X{% endif %}</td>
+    </tr>
+    <tr>
+      <td>can view websites</td>
+      <td>{% if view_websites %}X{% endif %}</td>
+    </tr>
+</table>
+
+<!--=======================================================================-->
+<h2>Business Details</h2>
+<table class="table table-condensed">
+    <tr>
+    <td>name</td><td>{{ biz }}</td>
+    </tr>
+    <tr>
+    <tr>
+    <td>id</td><td>{{ biz_id }}</td>
+    </tr>
+    <tr>
+    <td>members</td><td>{{ members }}</td>
+    </tr>
+    <tr>
+    <td>websites</td><td>{{ websites }}</td>
+    </tr>
+    <tr>
+    <td>all-sites</td><td>{{ all_sites }}</td>
+    </tr>
+    <tr>
+    <td>untracked sites</td><td>{{ untracked_sites }}</td>
+    </tr>
+</table>
+
+<!--=======================================================================-->
+<h2>Social Data</h2>
+
+<table class="table table-condensed">
+    <tr><th>Website</th><th>has-data?</th></tr>
+    <tr>
+        <td>Home Page</td>
+        <td>
+        {% if homepg_data %}
+            {% ifequal homepg_data "EMPTY" %}
+                Empty
+            {% else %}
+                EXISTS
+            {% endifequal %}
+        {% else %}
+            NONE
+        {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td>Blog</td>
+        <td>
+        {% if blog_data %}
+            {% ifequal blog_data "EMPTY" %}
+                Empty
+            {% else %}
+                EXISTS
+            {% endifequal %}
+        {% else %}
+            NONE
+        {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td>Yelp</td>
+        <td>
+        {% if yelp_data %}
+            {% ifequal yelp_data "EMPTY" %}
+                Empty
+            {% else %}
+                EXISTS
+            {% endifequal %}
+        {% else %}
+            NONE
+        {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td>Apartment Ratings</td>
+        <td>
+        {% if aptratings_data %}
+            {% ifequal aptratings_data "EMPTY" %}
+                EMPTY
+            {% else %}
+                EXISTS
+            {% endifequal %}
+        {% else %}
+            NONE
+        {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td>Facebook</td>
+        <td>
+        {% if fbook_data %}
+            {% ifequal fbook_data "EMPTY" %}
+                EMPTY
+            {% else %}
+                EXISTS
+            {% endifequal %}
+        {% else %}
+            NONE
+        {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td>Twitter</td>
+        <td>
+        {% if twitter_data %}
+            {% ifequal twitter_data "EMPTY" %}
+                EMPTY
+            {% else %}
+                EXISTS
+            {% endifequal %}
+        {% else %}
+            NONE
+        {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td>Youtube</td>
+        <td>
+        {% if youtube_data %}
+            {% ifequal youtube_data "EMPTY" %}
+                EMPTY
+            {% else %}
+                EXISTS
+            {% endifequal %}
+        {% else %}
+            NONE
+        {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td>Google Places</td>
+        <td>
+        {% if googleplaces_data %}
+            {% ifequal googleplaces_data "EMPTY" %}
+                EMPTY
+            {% else %}
+                EXISTS
+            {% endifequal %}
+        {% else %}
+            NONE
+        {% endif %}
+        </td>
+    </tr>
+</table>
+
+
+<!--=======================================================================-->
+<h2>Test</h2>
+{{ test }}
+
+
+<!--=======================================================================-->
+{% if everything %}
+    <h2>All template variables</h2>
+    <ul>
+    {% for k, v in everything %}
+        {% if k == "form" %}
+            <h2>Form</h2>
+            <li><fieldset>{{ v.as_p }}</fieldset></li>
+        {% else %}
+            <li><span class='keyword'>{{ k }}:</span> {{ v }}</li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+    <br>
+{% endif %}
+
+
+<!--=======================================================================-->
+{% if form %}
+    <h2>FORM(S)</h2>
+    <form action="" class="biz_website_form" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <fieldset>{{ form.as_p }}</fieldset>
+        <input type="submit" value="{% trans "Save changes" %}" />
+    </form>
+{% endif %}
+
+<!--=======================================================================-->
+{% if NO_SITES %}
+    <h3>NO WEBSITES WERE FOUND</h3>
+{% endif %}
+
+<!--=======================================================================-->
+{% if biz_list %}
+    <h2>List of users Businesses</h2>
+    {{ biz_list }}
+    <br>
+{% endif %}
+
+<!--=======================================================================-->
+</div>
+
+<br /><br /><br />
+<script src="{{ STATIC_PREFIX }}js/libs/jquery-1.7.1.min.js"></script>
+
+</body>
+</html>

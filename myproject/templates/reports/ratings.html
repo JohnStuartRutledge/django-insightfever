@@ -1,0 +1,146 @@
+{% load i18n %}
+{% load ifsetting_tag %}
+
+
+{% if ratings_empty %}
+    <h3>No Rating Sites Were Found</h3>
+    <br />
+    <p>Would you like to <a href="#" class="btn">add one</a></p>
+{% endif %}
+
+{% comment %} 
+------------------------------------------------------------------------------
+                           APARTMENT RATINGS
+------------------------------------------------------------------------------
+{% endcomment %}
+
+<!--|| RATINGS-OVERVIEW ||-->
+<h2 class="well"><a href="{{ websites.7 }}">Apartment Ratings</a></h2>
+
+{% if aptratings_data %}
+     
+    {% ifequal aptratings_data "EMPTY" %}
+        
+        <div class="alert alert-block">
+            <a class="close" data-dismiss="alert">x</a>
+            <h4 class="alert-heading">No Data</h4>
+            No reviews were found at this time.
+        </div>
+    
+    {% else %}
+        
+        <div class="fever_title_wrapper">
+            <h3>Apartment Ratings Overtime</h3>
+            <a href="#aptgraph-info" id="aptrating_info" rel="popover" 
+            data-original-title="About This Graph"
+            data-content="This graph demonstrates the month to month 
+            changes in your apartment rating score over time."
+            onClick="$('#aptrating_info').popover('show')">
+            <span class="label label-info">Info</span></a>
+        </div>
+        
+        <div id="ratings_graph"></div>
+        <!--|| APARTMENT-RATINGS ||-->
+        <div class="fever_title_wrapper">
+            <h3>Apartment Ratings Details</h3>
+            <a href="#aptdetails-info" id="aptdetails_info" rel="popover" 
+            data-original-title="About This Table"
+            data-content="This table provides a more detailed break down
+            of the individual scores used to construct the overall average score."
+            onClick="$('#aptdetails_info').popover('show')">
+            <span class="label label-info">Info</span></a>
+        </div>
+        <table id="fever_ratings_aptraings_table" class="table table-condensed table-bordered table-striped">
+            <thead>
+            <tr>
+                <th><i class="icon-resize-vertical"></i>Date</th>
+                <th>Average</th>
+                <th>Parking</th>
+                <th>Maintenance</th>
+                <th>Construction</th>
+                <th>noise</th>
+                <th>Grounds</th>
+                <th>Safety</th>
+                <th>Staff</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for apt in aptratings_data %}
+                <tr>
+                    <td>{{ apt.created_on|date:"Y-m-j"|title }}</td>
+                    <td class="fever_avgscore">{{ apt.recommended_by|default_if_none:"-" }}%</td>
+                    <td>{{ apt.overall_parking|default_if_none:"-" }}</td>
+                    <td>{{ apt.overall_maintenance|default_if_none:"-" }}</td>
+                    <td>{{ apt.overall_construction|default_if_none:"-" }}</td>
+                    <td>{{ apt.overall_noise|default_if_none:"-" }}</td>
+                    <td>{{ apt.overall_grounds|default_if_none:"-" }}</td>
+                    <td>{{ apt.overall_safety|default_if_none:"-" }}</td>
+                    <td>{{ apt.overall_office_staff|default_if_none:"-" }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <br />
+    {% endifequal %}
+
+{% else %}
+    <div class="fever_site_not_found">
+    Site not found, click to <a href="{% url biz_websites biz_id %}" class="btn">add one</a>
+    </div>
+{% endif %}
+
+
+{% comment %} 
+------------------------------------------------------------------------------
+                                  YELP
+------------------------------------------------------------------------------
+{% endcomment %}
+
+<h2 class="well"><a href="{{ websites.5 }}">Yelp</a></h2>
+
+{% if yelp_data %}
+
+    {% ifequal yelp_data "EMPTY" %}
+    
+        <div class="alert alert-block">
+            <h4 class="alert-heading">No Data</h4>
+            No reviews were found at this time.
+        </div>
+    
+    {% else %}
+    
+        <div class="fever_title_wrapper">
+            <h3>Yelp Details</h3>
+            <a href="#yelp-info" id="yelp_info" rel="popover" 
+            data-original-title="About This Table"
+            data-content="This table shows how your Yelp star rating has
+            changed over time."
+            onClick="$('#yelp_info').popover('show')">
+            <span class="label label-info">Info</span></a>
+        </div>
+        <table id="fever_ratings_yelp_table" class="table table-condensed table-bordered">
+                <thead>
+                <tr>
+                    <th><i class="icon-resize-vertical"></i>Date</th>
+                    <th>Review Count</th>
+                    <th>Stars</th>
+                </tr>
+                </thead>
+                <tbody>
+            {% for data in yelp_data %}
+                <tr>
+                    <td>{{ data.created_on|date:"Y-m-j"|title }}</td><!--Y, b j-->
+                    <td>{{ data.review_count }}</td>
+                    <td>{{ data.stars }}</td>
+                </tr>
+            {% endfor %}
+                </tbody>
+        </table>
+    
+    {% endifequal %}
+
+{% else %}
+    <div class="fever_site_not_found">
+    Site not found, click to <a href="{% url biz_websites biz_id %}" class="btn">add one</a>
+    </div>
+{% endif %}

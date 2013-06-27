@@ -1,0 +1,35 @@
+{% extends "reports/social/fullpg_base.html" %}
+{% load i18n %}
+{% load banana_tags %}
+
+{% block head_title %}{% trans "Mailchimp Account" %}{% endblock %}
+{% block body %}
+    
+<a href="#">&lt;&lt; back to reports </a>
+<div class="page-header"><h1>{% trans "Mailchimp Overview" %}</h1></div>
+
+<div class="row">
+    
+    <div class="span4">
+        <table class="table table-condensed table-striped">
+            <tbody>
+                <tr><td>screen name</td><td>&nbsp;</td></tr>
+                <tr><td>name</td><td>&nbsp;</td></tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="span7 offset1">
+        <p>Mailchimp stuff</p>
+        <br />
+        {{ email_list }}
+        
+        <br />
+        
+        {% banana_auth_url "Authorize" %}
+        
+    </div>
+</div>
+
+        
+{% endblock %}

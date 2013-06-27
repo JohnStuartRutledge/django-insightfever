@@ -1,0 +1,12 @@
+{% load i18n %}
+<div class="biz_info">
+    {% if biz.biz_name %} <p><b>Name</b>: {{ biz.biz_name }}</p>{% endif %}
+    {% if biz.biz_email %}<p><b>Email</b>: <a href="{{ biz.biz_email }}">{{ biz.biz_email }}</a>{% endif %}
+    {% if biz.biz_phone %}<p><b>Phone</b>: <a href="{{ biz.biz_phone }}">{{ biz.biz_phone }}</a>{% endif %}
+    {% if biz.address_1 %}<p><b>Address</b>: <a href="{{ biz.address_1 }}">{{ biz.address_1 }}</a>{% endif %}
+    {% if biz.address_2 %}<p><b>Address2</b>: <a href="{{ biz.address_2 }}">{{ biz.address_2 }}</a>{% endif %}
+    {% if biz.city %}<p><b>City</b>: <a href="{{ biz.city }}">{{ biz.city }}</a>{% endif %}
+    {% if biz.state %}<p><b>State</b>: <a href="{{ biz.state }}">{{ biz.state }}</a>{% endif %}
+    {% if biz.zipcode %}<p><b>Zip</b>: <a href="{{ biz.zipcode }}">{{ biz.zipcode }}</a>{% endif %}
+    {% if biz.homepg %}<p><b>homepg</b>: <a href="{{ biz.homepg }}">{{ biz.homepg }}</a></p>{% endif %}
+</div>

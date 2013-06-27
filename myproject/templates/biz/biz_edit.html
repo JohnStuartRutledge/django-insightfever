@@ -1,0 +1,9 @@
+{% extends "biz/base.html" %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Edit Business" %}{% endblock %}
+
+{% block body %}
+    <div class="page-header"><h1>Edit Business</h1></div>
+    {% include "biz/biz_form.html" %}
+{% endblock %}

@@ -1,0 +1,10 @@
+{% for message in messages %}
+    <div class="alert fade in {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+        <a href="#" class="close" onclick="$('.alert-success').alert('close');">&times;</a>
+        <p>{{ message }}</p>
+    </div>
+{% endfor %}
+
+{% block fever_js %}
+
+{% endblock %}

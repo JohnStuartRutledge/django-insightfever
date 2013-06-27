@@ -1,0 +1,16 @@
+{% extends "subnav_base.html" %}
+{% load i18n %}
+
+{% block body_class %}Business{% endblock %}
+
+{% block subnav %}
+
+        {% if user.is_authenticated %}
+            {% include "fever_sidebar.html" %}
+        {% else %}
+            &nbsp;
+        {% endif %}
+
+{% endblock %}
+
+{% block body_id %}fever_biz{% endblock %}

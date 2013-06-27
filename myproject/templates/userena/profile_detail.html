@@ -1,0 +1,39 @@
+{% extends "userena/base_userena.html" %}
+{% load i18n %}
+
+{% block title %}{{ profile.user.username }}'s {% trans "profile" %}.{% endblock %}
+{% block content_title %}<h2 class="content-title">{{ profile.user.username }} {% if profile.user.get_full_name %}({{ profile.user.get_full_name }}){% endif %}</h2>{% endblock %}
+
+{% block body %}
+
+    {% comment %}Dirty hack. Will use django-guardian in the future.{% endcomment %}
+    
+    {% include "fever_sidebar.html" %}
+    
+    <div class="span7 offset1">
+            
+            <h1 class="fever_pagetitle">{{ profile.user.username|capfirst }}'s Profile</h1>
+            
+            <img src="{{ profile.get_mugshot_url }}" alt="{% trans "Your mugshot" %}" />
+            
+            <dl>
+                {% if profile.user.first_name and profile.user.last_name %}
+                    <dt>{% trans "Name" %}</dt>
+                    <dd>{{ profile.user.first_name|capfirst }} {{ profile.user.last_name|capfirst }}</dd>
+                {% endif %}
+                
+                {% if profile.facebook %}
+                    <dt>{% trans "Facebook Account" %}</dt>
+                    <dd><a href="http://www.facebook.com/{{ profile.facebook }}">{{ profile.facebook }}</a></dd>
+                {% endif %}
+                
+                {% if profile.twitter %}
+                    <dt>{% trans "Twitter" %}</dt>
+                    <dd><a href="{{ profile.twitter }}">{{ profile.twitter }}</a></dd>
+                {% endif %}
+                
+            </dl>
+        
+    </div>
+    
+{% endblock %}

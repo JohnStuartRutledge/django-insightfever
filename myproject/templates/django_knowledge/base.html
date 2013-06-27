@@ -1,0 +1,49 @@
+{% load bootstrap_tags %}
+{% load ifsetting_tag %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}{% endblock title %} | Support Center</title>
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
+  <link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="{{ STATIC_URL }}knowledge/css/reset.css">
+  <link rel="stylesheet" href="{{ STATIC_URL }}knowledge/css/main.css">  
+</head>
+
+<body>
+
+{% block body %}
+<div class="wrapper">
+    {% comment %}
+      django-knowledge documentation
+      http://django-knowledge.readthedocs.org/en/latest
+    {% endcomment %}
+    
+    <div class="content">
+        <!--<div class="page-header"><h1>Knowledge Base</h1></div>-->
+      {% block knowledge_inner %}
+
+        {% block content %}
+          <!-- your tradition content is loaded here if not django knowledge -->
+        {% endblock content %}
+
+        <!-- django knowledge is loaded here -->
+      {% endblock knowledge_inner %}
+    </div>
+</div>
+{% endblock %}
+
+<footer>
+  <div class="inner">
+  <div class="container">
+  <div class="legal">&copy; 2011 (<a href="http://www.mindwink.com"> Mind Wink Inc </a>)</div>
+  </div>
+  </div>
+</footer>
+  
+
+</div>
+</body>
+</html>

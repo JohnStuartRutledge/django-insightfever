@@ -1,0 +1,39 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load ifsetting_tag %}
+
+{% block head_title %}{% trans "About Us" %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans "About Us" %}</h1>
+    
+    {% if user.is_authenticated %}
+        <p>About Mind Wink:</p>
+        
+        <dl class="aboutus_wrapper">
+            <p>Who we are</p>
+            <ul>
+                <li>[pic] James</li>
+                <li>[pic] Josh</li>
+                <li>[pic] Mo</li>
+                <li>[pic] Stu</li>
+            </ul>
+            
+            {% ifsetting ACCOUNT_OPEN_SIGNUP %}
+            {% else %}
+                {% if user.is_staff %}
+                    <p>you have staff permissions</p>
+                {% endif %}
+            {% endifsetting %}
+        </dl>
+        {% else %}
+            {% url acct_login as login_url %}
+            
+            <p class="what_next">
+                {% ifsetting ACCOUNT_OPEN_SIGNUP %}
+                <p>ifsetting ACCOUNT_OPEN_SIGNUP == True: then you see me</p>
+                {% endifsetting %}
+            </p>
+        {% endif %}
+{% endblock %}

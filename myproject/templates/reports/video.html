@@ -1,0 +1,32 @@
+<div class="well"><h2><a href="{{ websites.6 }}">Youtube</a></h2></div>
+
+<div class="fever_title_wrapper">
+    <h3>Youtube Details</h3>
+    <a href="#youtube-info" id="youtube_info" rel="popover" 
+    data-original-title="More Info"
+    data-content="This section monitors views and other statistics
+    having to do with your Youtube videos."
+    onClick="$('#youtube_info').popover('show')">
+    <span class="label label-info">Info</span></a>
+</div>
+
+{% if youtube_data %}
+    {% ifequal youtube_data "EMPTY" %}
+        
+        <div class="alert alert-block">
+            <h4 class="alert-heading">No Data</h4>
+            Youtube section is coming soon....
+        </div>
+    
+    {% else %}
+        
+        Youtube section is coming soon....
+        
+    {% endifequal %}
+{% else %}
+
+    <h3>No Youtube URL was Found</h3>
+    <br />
+    <p>Would you like to <a href="#" class="btn">add one</a></p>
+    
+{% endif %}

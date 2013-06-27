@@ -1,0 +1,37 @@
+{% extends "userena/base_userena.html" %}
+{% load i18n %}
+{% load bootstrap_tags %}
+{% load ifsetting_tag %}
+
+{% block title %}{% trans "Signup" %}{% endblock %}
+
+
+{% block body %}
+
+<div class="span4 offset1">
+    
+    {% if user.is_authenticated %}
+        <div class="alert alert-error">
+            <a class="close">&times;</a>
+            <h4>{% trans "You are already logged in." %}</h4>
+        </div>
+    {% endif %}
+   
+    <form class="form-vertical" action="" method="post">{% csrf_token %}
+        <legend>Signup</legend>
+        <fieldset>{{ form|as_bootstrap }}</fieldset>
+        <div class="form-actions">
+            <button class="btn" type="submit">{% trans "Signup" %}</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+
+{% block extra_body %}
+    <script type="text/javascript">
+        $(function(){
+            $("#id_username").focus();
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "biz/base.html" %}
+
+{% load i18n %}
+{% load account_tags %}
+
+{% block head_title %}
+    {% user_display page_user as page_user_display %}
+    Business for {{ page_user_display }}
+{% endblock %}
+
+{% block body %}
+    {% user_display page_user as page_user_display %}
+    
+    <h1>Business for {{ page_user_display }}</h1>
+    
+    {% include "biz/_biz_info.html" %}
+    
+    {% if is_me %}
+        <p><a id="edit-biz-box" href="{% url biz_edit %}" class="btn">Edit Business</a></p>
+    {% endif %}
+{% endblock %}
+
+{% block extra_body %}
+    <script>
+        $(function() {
+            $("#edit-biz-box").modal({
+                backdrop: true
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "biz/base.html" %}
+
+{% load i18n %}
+{% load account_tags %}
+{% load pagination_tags %}
+
+{% block head_title %} All Client Businesses {% endblock %}
+
+{% block body %}
+    <h1>All Client Business</h1>
+    
+    {% autopaginate businesses %}
+    
+    {% for bis in businesses %}
+        {% include "biz/_biz_item.html" %}
+    {% endfor %}
+    
+    {% paginate %}
+    
+{% endblock %}

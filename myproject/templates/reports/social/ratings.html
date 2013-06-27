@@ -1,0 +1,18 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load ifsetting_tag %}
+
+{% block head_title %}{% trans "Customer Ratings" %}{% endblock %}
+{% block body %}
+    
+    <h1>{% trans "Customer Ratings" %}</h1>
+    
+    {% if user.is_authenticated %}
+        <p>Monitor customer ratings across multiple sites.</p>
+        
+        {% else %}
+            {% url acct_login as login_url %}
+            
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,82 @@
+{% load i18n %}
+
+<div class="span3">
+    <div class="well sidebar-nav">
+        <ul id="fever_sidebar" class="nav nav-list">
+            
+            {% if dashboard %}
+                <li class="nav-header active"><a href="#">Dashboard</a></li>
+            {% else %}
+                <li class="nav-header"><a href="/dashboard/">Dashboard</a></li>
+            {% endif %}
+            
+            
+            <li class="nav-header">PROFILE</li>
+            <li>
+                <a href="/accounts/{{ user }}">
+                <i class="icon-user"></i>{% trans "  My Profile" %}
+                </a>
+            </li>
+            <li>
+                <a href="/accounts/{{ user }}/edit/">
+                <i class="icon-pencil"></i>{% trans "Edit details" %}
+                </a>
+            </li>
+            <li>
+                <a href="/social/accounts">
+                <i class="icon-book"></i>{% trans " Accounts" %}
+                </a>
+            </li>    
+            <li>
+                <a href="/accounts/{{ user }}/password/">
+                <i class="icon-lock"></i>{% trans "  Change password" %}
+                </a>
+            </li>
+            <li>
+                <a href="/accounts/{{ user }}/email/">
+                <i class="icon-envelope"></i>{% trans "  Change Email" %}
+                </a>
+            </li>
+
+            
+            {% if biz.id %}
+                <li class="nav-header">Business</li>
+                
+                {% ifequal page_name "biz_details" %}
+                <li class="active">{% else %}<li>{% endifequal %}
+                    <a href="{% url biz_details biz.id %}">
+                    <i class="icon-home"></i>{% trans "  Profile" %}
+                    </a>
+                </li>
+                {% ifequal page_name "biz_edit" %}
+                <li class="active">{% else %}<li>{% endifequal %}
+                    <a href="{% url biz_edit biz.id %}">
+                    <i class="icon-pencil"></i>{% trans "  Edit" %}
+                    </a>
+                </li>
+                {% ifequal page_name "biz_websites" %}
+                <li class="active">{% else %}<li>{% endifequal %}
+                    <a href="{% url biz_websites biz.id %}">
+                    <i class="icon-eye-open"></i>{% trans "  Websites" %}
+                    </a>
+                </li>
+                {% ifequal page_name "overview" %}
+                <li class="active">{% else %}<li>{% endifequal %}
+                    <a href="{% url reports_overview biz.id %}">
+                    <i class="icon-signal"></i>{% trans "  Reports" %}
+                    </a>
+                </li>
+            {% endif %}
+        
+        </ul>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    // gets rid of the strange hash value that facebook
+    // leaves after redirecting from their API login
+   if (window.location.hash == '#_=_') {
+      window.location.hash = '';
+   }
+</script>

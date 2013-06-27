@@ -1,0 +1,156 @@
+{% extends "reports/social/fullpg_base.html" %}
+{% load i18n %}
+{% load fever_tags %}
+
+{% block head_title %}{% trans "Schedule Post" %}{% endblock %}
+{% block fever_js %}
+    <script type="text/javascript" src="{{ STATIC_PREFIX }}js/libs/datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="{{ STATIC_PREFIX }}js/moment.min.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_PREFIX }}js/libs/datepicker/css/datepicker.css">
+    <script type="text/javascript" src="{{ STATIC_PREFIX }}js/social/postqueue.js"></script>
+{% endblock %}
+
+{% block body %}
+
+{% if session_expired %}
+    <a href="/social/accounts" target="_blank">Renew your facebook token</a>
+    <a href="/reports/2/facebook" target="_blank">Refresh your managed pages</a>
+{% endif %}
+
+<div class="tabbable tabs-above">
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#create_tab" data-toggle="tab">Create</a></li>
+        <li><a href="#upcoming_tab" data-toggle="tab">Upcoming</a></li>
+        <li><a href="#drafts_tab" data-toggle="tab">Drafts</a></li>
+        <li><a href="#sent_tab" data-toggle="tab">Sent</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <!--////////////////////////////////////////////////////////////////-->
+        <div class="tab-pane active" id="create_tab">
+            <div class="row">
+                <div class="span8 offset1">
+                <div class="page-header"><h2>{% trans "Create New Post" %}</h2></div>
+                    <form class="form-inline post_queue_form" action="" name="new_post" method="post">
+                        {% csrf_token %}
+
+                        <table class="table table-bordered">
+                        {% for field in form %}
+                            <tr>
+                                <td class="field_title"><strong>{{ field.label }}</strong></td>
+                                <td class="field_content">
+                                    {% if field.name == 'status' or field.name == 'social_sites' %}
+                                        <div class="post_queue_list_items">{{ field }}</div>
+                                    {% else %}
+                                        {{ field }}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </table>
+
+                        <div class="form-actions">
+                            <button class="btn btn-primary" type="submit">{% trans "Save Changes" %}</button>
+                            <button class="btn" type="button">{% trans "Save As Draft" %}</button>
+                            <button class="btn" type="reset">{% trans "Reset" %}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!--////////////////////////////////////////////////////////////////-->
+        <div class="tab-pane" id="upcoming_tab">
+            <div class="row">
+                <div class="span8 offset1">
+                    <div class="page-header"><h2>{% trans "Upcoming Posts" %}</h2></div>
+
+                        {% if upcoming_posts %}
+                            {% for form in upcoming_posts %}
+                                {% comment %}
+
+                                TODO:
+                                    instead of including a template file here you
+                                    should create a custom template tag so that
+                                    you can do:
+                                    {{ form.as_upcoming }}
+
+                                {% endcomment %}
+                                {% include "social/post_form.html" %}
+                            {% endfor %}
+                        {% else %}
+                            <p>No upcoming posts found</p>
+                        {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+        <!--////////////////////////////////////////////////////////////////-->
+        <div class="tab-pane" id="drafts_tab">
+            <div class="row">
+                <div class="span8 offset1">
+                    <div class="page-header"><h2>{% trans "Your Drafts" %}</h2></div>
+                    {% if drafts %}
+                        {% for form in drafts %}
+                            {% include "social/draft_form.html" %}
+                        {% endfor %}
+                    {% else %}
+                        <p>No drafts were found.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!--////////////////////////////////////////////////////////////////-->
+        <div class="tab-pane" id="sent_tab">
+            <div class="row">
+            <div class="span8 offset1">
+                <div class="page-header"><h2>{% trans "Sent Posts" %}</h2></div>
+                {% comment %}
+                    TODO: organize past posts into a paginated table
+                    sortable by date and by biz name. If they only have
+                    one business, then exclude sortability for that field
+                {% endcomment %}
+                {% if past_posts %}
+
+                    <table id="post_queue_sent_posts_table" class="table table-condensed table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>Business</th>
+                            <th><i class="icon-resize-vertical"></i>Date Sent</th>
+                            <th>Message</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for post in past_posts %}
+                            <tr>
+                                <td class="sent_posts_biz_field">{{ post.biz }}</td>
+                                <td class="sent_posts_date_field">
+                                    {% comment %}
+                                        TODO:
+                                        align the dates in this column.
+                                        Also, create a divider for each month
+                                        and one or each year.
+                                    {% endcomment %}
+                                    {{ post.post_date|date:"y/m/d – g:iA" }}
+                                </td>
+                                <td class="sent_posts_msg_field">{{ post.message }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% comment %}
+                        TODO: add pagination
+                    {% endcomment %}
+                {% else %}
+                    <p>You have no sent posts</p>
+                {% endif %}
+            </div>
+            </div>
+        </div>
+        <!--////////////////////////////////////////////////////////////////-->
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,97 @@
+{% load i18n %}
+{% load ifsetting_tag %}
+
+
+{% comment %} 
+------------------------------------------------------------------------------
+                                  FACEBOOK
+------------------------------------------------------------------------------
+{% endcomment %}
+
+<div class="well">
+    <h2><a href="{{ websites.3 }}">Facebook</a></h2>
+</div>
+
+<div id="fever_fbook_wrapper">
+ 
+{% if fbook_data %}
+    {% ifequal fbook_data "EMPTY" %}
+        
+        <div class="alert alert-block">
+            <h4 class="alert-heading">No Data</h4>
+            You have no facebook data at this time.
+        </div>
+    
+    {% else %}
+        
+        <!-- FACEBOOK BAR CHART -->
+        <div class="fever_title_wrapper">
+            <h3>Age Distribution</h3>
+            <a href="#age-info" id="fbook_age_info" rel="popover" data-original-title="Age Distribution"
+            data-content="The demographic information below is broken down by the age/sex of your facebook users.
+            Men are presented on the left side, women on the right." 
+            onClick="$('#fbook_age_info').popover('show')">
+            <span class="label label-info">Info</span></a>
+        </div>
+        <div id="barchart"></div>
+        
+        
+        <!-- FACEBOOK DONUT CHART -->
+        <div class="fever_title_wrapper">
+            <h3>Male/Female Ratio</h3>
+            <a href="#sex-info" id="fbook_sexratio" rel="popover" 
+            data-original-title="Sex Distribution"
+            data-content="Here is a pie chart featuring the overall male to female ratio.
+            You can also toggle the button below to see an age distribution where both genders 
+            are combined." onClick="$('#fbook_sexratio').popover('show')">
+            <span class="label label-info">Info</span></a>
+        </div>
+        
+        <div id="demographic_pie_wrapper">
+            <div id="demographic_pie">
+                <div id="demo_pie_radios" class="btn-group" data-toggle="buttons-radio">
+                <button class="btn active" id="sex" type="radio" name="demodonut" value="sex">Sex</button>
+                <button class="btn" id="age" type="radio" name="demodonut" value="age">Age</button>
+                </div>
+            </div>
+        
+            <div id="demo_pie_legend"></div>
+        </div>
+    
+    {% endifequal %}
+
+{% else %}
+    <div class="fever_site_not_found">
+    Site not found, click to <a href="{% url biz_websites biz_id %}" class="btn">add one</a>
+    </div>
+{% endif %}
+
+</div><!--end:fever_fbook_wrapper -->
+
+
+{% comment %} 
+------------------------------------------------------------------------------
+                                  TWITTER
+------------------------------------------------------------------------------
+{% endcomment %}
+
+
+<h2 class="well"><a href="{{ websites.4 }}">Twitter</a></h2>
+
+{% if twitter_data %}
+    {% ifequal twitter_data "EMPTY" %}
+    
+        <div class="alert alert-block">
+            <h4 class="alert-heading">No Data</h4>
+            Twitter section is coming soon....
+        </div>
+    
+    {% else %}
+        <p>Twitter section coming soon...</p>
+    {% endifequal %}
+
+{% else %}
+    <div class="fever_site_not_found">
+    Site not found, click to <a href="#" class="btn">add one</a>
+    </div>
+{% endif %}

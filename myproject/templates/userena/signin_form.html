@@ -1,0 +1,22 @@
+{% extends "userena/base_userena.html" %}
+{% load i18n %}
+{% load bootstrap_tags %}
+{% load ifsetting_tag %}
+
+{% block title %}{% trans "Signin" %}{% endblock %}
+
+{% block body %}
+<div class="span3 offset1">
+    <form class="form" action="" method="post">
+      {% csrf_token %}
+      <legend>{% trans "Signin" %}</legend>
+      <fieldset>
+          {{ form|as_bootstrap }}
+      </fieldset>
+      <div class="form-actions">
+          <button class="btn btn-primary" type="submit">{% trans "Signin" %}</button> 
+      </div>
+      <p class="forgot-password"><a href="{% url userena_password_reset %}" title="{% trans "Forgot your password?" %}">{% trans "Forgot your password?" %}</a></p>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% load i18n %}
+{% load bootstrap_tags %}
+{% load ifsetting_tag %}
+
+{% block body %}
+    <div class="span7">
+    <form action="" class="form-horizontal" id="biz_form" enctype="multipart/form-data" method="post">{% csrf_token %}
+        {% if biz.biz_name %}<legend>{{ biz.biz_name }}</legend>{% endif %}
+        <fieldset>{{ form|as_bootstrap }}</fieldset>
+        <div class="form-actions">
+        <button class="btn btn-primary" type="submit">{% trans "Save changes" %}</button>
+        </div>
+    </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,208 @@
+
+/* =============================================================================
+HTML5 display definitions
+========================================================================== */
+
+.chart_separator {
+    border-top: 1px dotted #FFF;
+    margin: 100px 0;
+    display: block;
+    overflow: hidden;
+}
+
+#barchart {
+    background-color: #222;
+    width: 600px;
+    margin: 0 auto 40px;
+}
+
+#demographic_chart rect {
+    font: 10px Helvetica, sans-serif;
+    stroke: #222;
+}
+
+.age_label {
+   font-size: 14px;
+   fill: #9f9f9f; 
+}
+
+.male_rect {
+    fill: #336CA4;
+}
+
+text {
+    font-family: "Helvetica Neue", Helvetica, Verdana;
+    fill: #9f9f9f;
+    font-size: 12px;
+    font-weight: 100;
+    
+}
+.male_text {
+    fill: white;
+    font-size: 12px;
+}
+
+.female_rect {
+    fill: #FFB2C0;
+}
+
+.female_text {
+    fill: black;
+}
+
+.rule {
+    fill: #3f3f3f;
+}
+
+/***************************
+ DEMOGRAPHIC DONUT
+***************************/
+
+#demographic_pie {
+    width: 300px;
+    float: left;
+    overflow: hidden;
+}
+
+#demographic_pie svg {
+    margin: 20px 0 0 0;
+}
+
+#demo_pie_radios {
+    margin-left: 88px;
+    overflow: hidden;
+}
+
+#demo_pie_radios label {
+    margin: 0 20px 0 1px;
+    font-weight: 300;
+    font-size: 1.1em;
+}
+
+.donut_text {
+    fill: #222;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.donut_text_title {
+    fill: #9f9f9f;
+    font-size: 25px;
+}
+
+#demographic_swap {
+    background: #222;
+    color: white;
+    font-size: 18px;
+    margin: 30px;
+    padding: 10px;
+    border: 1px solid skyblue;
+    cursor: pointer !important;
+    display: block;
+    clear: both;
+    width: 100px;
+    text-align: center;
+}
+#demo_pie_legend {
+    display: block;
+    width: 240px;
+    height: 240px;
+    float: left;
+    overflow: hidden;
+    margin: 50px 0 0 100px;
+    border: 1px solid #000;
+    padding: 30px;
+}
+
+.legend_box_wrapper {
+    width: 240px;
+    float: left;
+    overflow: hidden;
+}
+
+.legend_box {
+    display: block;
+    float: left;
+    height: 30px;
+    width: 30px;
+}
+
+.legend_box_label {
+    display: block;
+    float: left;
+    margin-left: 30px;
+    font-weight: 200;
+}
+
+
+
+/***************************
+ CALENDAR
+***************************/
+
+
+.svg_wrapper {
+    display: block;
+    margin: 50px 0 60px -90px;
+    overflow: visible;
+}
+
+.day {
+  fill: #fff;
+  stroke: #ccc;
+  shape-rendering: crispEdges;
+}
+
+.month {
+  fill: none;
+  stroke: #000;
+  stroke-width: 2px;
+  shape-rendering: crispEdges;
+}
+
+.calendar_year {
+    font-size: 30px;
+}
+
+.cal_month_label {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+
+/***************************
+ RATINGS LINEAR GRAPH
+***************************/
+
+path.line {
+  fill: none;
+  stroke: red;
+  stroke-width: 1.5px;
+}
+
+path.area {
+  fill: #555;
+}
+
+.axis {
+  shape-rendering: crispEdges;
+}
+
+.x.axis line {
+  stroke: #B2B2B2;
+  stroke-opacity: .5;
+}
+
+.x.axis .minor {
+  stroke-opacity: .0;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.y.axis line, .y.axis path {
+  fill: none;
+  stroke: white;
+}
+

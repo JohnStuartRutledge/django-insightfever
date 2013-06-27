@@ -1,0 +1,30 @@
+{% extends "biz/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Business Details" %}{% endblock %}
+{% block content_title %}<h2 class="content-title">{{ biz.biz_name }}</h2>{% endblock %}
+{% block body %}
+
+<div id="fever_main_content">
+    
+    <div id="profile_biz">
+        <h2>Your Businesses</h2>
+        
+        {% if biz_list %}
+            <ul>
+            {% for biz in biz_list %}
+            <li><a href="/business/{{ biz.id }}/">{{ biz.biz_name }}</a></li>
+            {% endfor %}
+            </ul>
+        
+        {% else %}
+            <p>No businesses were found. To add one, click the button below.</p>
+            <div id="dashboard_makebiz_btn"><a href="#">Add Business</a></div>
+        
+        {% endif %}
+        
+    </div>
+
+</div>  
+
+{% endblock %}

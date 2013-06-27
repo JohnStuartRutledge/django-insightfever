@@ -1,0 +1,28 @@
+{% load account_tags %}
+<div class="biz_item">
+    <div class="biz_name">
+        {% if biz.prop_name %}
+            <a href="{% url biz_detail biz.biz_id %}">{{ biz.prop_name }}</a>
+        {% else %}
+            <a href="{% url biz_detail biz.biz_id %}">else statement from _biz_item.html</a>
+        {% endif %}
+    </div>
+    <div class="biz_details">
+        {% if biz.prop_name %}<a href="{{ biz.prop_name }}">{{ biz.prop_name }}</a>{% endif %}
+        {% if biz.prop_email %}<a href="{{ biz.prop_email }}">{{ biz.prop_email }}</a>{% endif %}
+        {% if biz.prop_phone %}<a href="{{ biz.prop_phone }}">{{ biz.prop_phone }}</a>{% endif %}
+        {% if biz.address_1 %}<a href="{{ biz.address_1 }}">{{ biz.address_1 }}</a>{% endif %}
+        {% if biz.address_2 %}<a href="{{ biz.address_2 }}">{{ biz.address_2 }}</a>{% endif %}
+        {% if biz.city %}<a href="{{ biz.city }}">{{ biz.city }}</a>{% endif %}
+        {% if biz.state %}<a href="{{ biz.state }}">{{ biz.state }}</a>{% endif %}
+        {% if biz.zipcode %}<a href="{{ biz.zipcode }}">{{ biz.zipcode }}</a>{% endif %}
+        
+        {% if biz.homepg %}<a href="{{ biz.homepg }}">{{ biz.homepg }}</a>{% endif %}
+        <br>
+        {% if biz.privacy %}<a href="{{ biz.privacy }}">{{ biz.privacy }}</a>{% endif %}
+        <div>
+        <span>---------------------------------------------------------------------------</span>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>

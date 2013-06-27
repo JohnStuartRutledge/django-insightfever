@@ -1,0 +1,48 @@
+{% extends "biz/base.html" %}
+{% load i18n %}
+{% load bootstrap_tags %}
+{% load banana_tags %}
+{% load ifsetting_tag %}
+
+{% block title %}{% trans "Accounts" %}{% endblock %}
+{% block content_title %}<h2 class="content-title">Your Accounts</h2>{% endblock %}
+
+{% block body %}
+    <div class="page-header">
+        <h1>Accounts <small>Add 3rd party services to your Insight Fever account</small></h1>
+    </div>
+    
+    <table class="table">
+        <tbody>
+        <tr>
+            <td><h3>Google</h3></td>
+            {% if google_disconnect_id %}
+                <td><a href="{% url socialauth_disconnect_individual 'google-oauth2' google_disconnect_id %}" class="btn btn-danger btn-small">Disconnect</a></td>
+            {% else %}
+                <td><a rel="nofollow" href="{% url socialauth_begin 'google-oauth2' %}" class="btn btn-primary btn-small">Add Account</a></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td><h3>Twitter</h3></td>
+            {% if twitter_disconnect_id %}
+                <td><a href="{% url socialauth_disconnect_individual 'twitter' twitter_disconnect_id %}" class="btn btn-danger btn-small">Disconnect</a></td>
+            {% else %}
+                <td><a rel="nofollow" href="{% url socialauth_begin 'twitter' %}" class="btn btn-primary btn-small">Add Account</a></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td><h3>Facebook</h3></td>
+            {% if facebook_disconnect_id %}
+                <td><a href="{% url socialauth_disconnect_individual 'facebook' facebook_disconnect_id %}" class="btn btn-danger btn-small">Disconnect</a></td>
+            {% else %}
+                <td><a rel="nofollow" href="{% url socialauth_begin 'facebook' %}" class="btn btn-primary btn-small">Add Account</a></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td><h3>Mailchimp</h3></td>
+            <td>{% banana_auth_url "Add Account" %}</td>
+        </tr>
+        </tbody>
+    </table>
+
+{% endblock %}

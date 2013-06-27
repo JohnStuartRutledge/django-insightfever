@@ -1,0 +1,64 @@
+<div class="section_wrapper">
+    <h1 class="toggle_title">SOCIAL SITES REPORT</h1>
+    <div class="toggle_content">
+    
+        <div class="report_summary">
+        Explores data on various useful topics 
+        collected from the social media sites you currently subscribe to.
+        </div>
+        <div class="report_content">
+    
+        <div class="report_title"><a href="@@URL_FACEBOOK@@">Facebook</a></div>
+            
+            <div class="report_paragraph"><p>
+                The demographic information below is broken down by the age/sex of your facebook users.<br>
+                Men are presented on the left side, women on the right.
+            </p></div>
+            
+            <!-- DEMOGRAPHIC PYRAMID -->
+            <div id="barchart"></div>
+            
+            <div class="brclear"></div>
+            <div class="report_paragraph"><p>
+                Here is a pie chart featuring the overall male to female ratio.<br>
+                You can also toggle the button below to see an age distribution where both genders are combined.
+            </p></div>
+            
+            <!-- DEMOGRAPHIC DONUT CHART -->
+            <div id="demographic_pie">
+                
+                <div id="demo_pie_radios">
+                    <input id="sex" type="radio" name="demodonut" value="sex" checked> 
+                    <label for="sex">Sex</label> 
+                    <input id="age" type="radio" name="demodonut" value="age"> 
+                    <label for="age">Age</label>
+                </div>
+            </div>
+            <div id="demo_pie_legend"></div>
+            
+            <div class="brclear"></div>
+            <div class="chart_separator"></div>
+            <div class="report_paragraph"><p>
+                NOTE - THIS FEATURE IS COMING SOON ( TEMPORARY EXAMPLE GRAPH BELOW )<br>
+                Below you will find a series of colored squares representing every day of every month this year.
+                Warmer colors mean your Facebook page was more busier (in terms of traffic) than the average.<br>
+                Colder colors mean your Facebook page was less busy that day.
+                </p></div>
+            <!-- ACTIVITY CALENDAR -->
+            <div class="svg_wrapper">
+            <div id="report_calendar"></div>
+            </div>
+        
+        <!--
+        <div class="report_title">Twitter</div>
+        <ul class="report_list">
+            <li>Stats (this months changes)</li>
+            <li><a href="#posts_twitter">Highlighted Re-tweets</a></li>
+        </ul>
+        -->
+
+    </div><!--end report_content -->
+    
+    
+</div>
+</div><!--end_section_wrapper-->

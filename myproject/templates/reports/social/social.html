@@ -1,0 +1,18 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load ifsetting_tag %}
+
+{% block head_title %}{% trans "Social Overview" %}{% endblock %}
+{% block body %}
+    
+    <h1>{% trans "Social Media Overview" %}</h1>
+    
+    {% if user.is_authenticated %}
+        <p>Overview of your social media accounts here</p>
+        
+        {% else %}
+            {% url acct_login as login_url %}
+            
+    {% endif %}
+{% endblock %}
